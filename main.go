@@ -1,18 +1,21 @@
 package main
 
 import (
-	"GinFrame/model"
 	"GinFrame/router"
-	"github.com/gin-gonic/gin"
-	"log"
 )
 
-//获取环境变量
+func init() {
+	InitDB() //数据库连接
+}
+
 func main() {
-	r := gin.Default()
-	router.InitRouter(r)
-	model.DBInit()
-	if err := r.Run(":9999"); err != nil {
-		log.Fatal("程序启动失败:", err)
-	}
+	/**
+	 * @Name 入口文件
+	 * @Param
+	 * @Return
+	 * @Date 2022/4/9 23:57
+	 * @Author ZhangZe
+	 **/
+	run := router.Router
+	run(":8000")
 }
