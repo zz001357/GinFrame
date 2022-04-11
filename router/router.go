@@ -7,20 +7,24 @@ package router
 
 import (
 	"GinFrame/admin"
+	"GinFrame/api"
 	"github.com/gin-gonic/gin"
 	"log"
 	"net/http"
 )
 
 func Router(addr string) {
-	router := gin.Default()
-	router.Use(Cors()) //开启中间件 允许使用跨域请求
-
-	admin.Admin(router)
-	if err := router.Run(addr); err != nil {
+	r := gin.Default()
+	r.Use(Cors()) //开启中间件 允许使用跨域请求
+	routers(r)
+	if err := r.Run(addr); err != nil {
 		log.Fatal("程序启动失败:", err)
 
 	}
+}
+func routers(router *gin.Engine) {
+	admin.Admin(router)
+	api.Api(router)
 }
 func Cors() gin.HandlerFunc {
 	return func(context *gin.Context) {

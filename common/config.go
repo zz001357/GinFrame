@@ -5,20 +5,17 @@
 
 package common
 
-import (
-	"gopkg.in/ini.v1"
-	"log"
-)
+// 定义数据的返回结构体
 
-// 根据文件名，段名，键名获取ini的值
+type Response struct {
+	Code    int         `json:"code"`
+	Message string      `json:"message"`
+	Data    interface{} `json:"data"`
+}
 
-func GetMysql(filename, expectSection string) string {
-	file, err := ini.Load(filename)
-	if err != nil {
-		log.Println("文件读取错误", err)
-		panic(err)
-
-	}
-	Port := file.Section(expectSection).Key("dsn").String()
-	return Port
+func (r Response) Result(code int, message string, data interface{}) Response {
+	r.Code = code
+	r.Message = message
+	r.Data = data
+	return r
 }
