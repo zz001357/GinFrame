@@ -38,7 +38,7 @@ func getResumeInfo(c *gin.Context) {
 	 * @Date 2022/4/11 15:01
 	 * @Author ZhangZe
 	 **/
-	sql := "select * from t_user_info"
+	sql := "select * from t_resume"
 	data, err := common.ReadSql(sql)
 	if err != nil {
 		log.Println(err)

@@ -25,11 +25,11 @@ func init() {
 
 //查询
 
-func ReadSql(sql string) (map[string]string, error) {
-	record := make(map[string]string)
+func ReadSql(sql string) ([]map[string]string, error) {
+	var records []map[string]string
 	data, err := db.Query(sql)
 	if err != nil {
-		return record, err
+		return records, err
 	}
 	columns, _ := data.Columns()
 	scanArgs := make([]interface{}, len(columns))
@@ -41,6 +41,7 @@ func ReadSql(sql string) (map[string]string, error) {
 		scanArgs[i] = &values[i]
 	}
 	for data.Next() {
+		record := make(map[string]string)
 		err = data.Scan(scanArgs...)
 		//因为这里的values的每个值的地址对应的是scanArgs
 		for i, col := range values {
@@ -49,6 +50,7 @@ func ReadSql(sql string) (map[string]string, error) {
 				record[columns[i]] = string(col.([]byte))
 			}
 		}
+		records = append(records, record)
 	}
-	return record, err
+	return records, err
 }
