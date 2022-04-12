@@ -7,6 +7,7 @@ package api
 
 import (
 	"GinFrame/common"
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"log"
 	"net/http"
@@ -38,7 +39,9 @@ func getResumeInfo(c *gin.Context) {
 	 * @Date 2022/4/11 15:01
 	 * @Author ZhangZe
 	 **/
-	sql := "select * from t_resume"
+	param := common.Params(c, "search_key")
+	var sql string
+	sql = fmt.Sprint("select * from t_resume where v_company_name like '%", param, "%' or v_position like '%", param, "%' or v_word_content like '%", param, "%'")
 	data, err := common.ReadSql(sql)
 	if err != nil {
 		log.Println(err)

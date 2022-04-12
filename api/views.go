@@ -8,6 +8,6 @@ package api
 import "github.com/gin-gonic/gin"
 
 func Api(c *gin.Engine) {
-	c.GET("/api/getUserInfo", getUserInfo)     //获取基本信息
-	c.GET("/api/getResumeInfo", getResumeInfo) //获取简历信息
+	c.POST("/api/getUserInfo", getUserInfo)     //获取基本信息
+	c.POST("/api/getResumeInfo", getResumeInfo) //获取简历信息
 }

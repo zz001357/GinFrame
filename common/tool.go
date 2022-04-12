@@ -6,6 +6,7 @@
 package common
 
 import (
+	"github.com/gin-gonic/gin"
 	"gopkg.in/ini.v1"
 	"log"
 )
@@ -21,4 +22,10 @@ func GetMysql(filename, expectSection string) string {
 	}
 	Port := file.Section(expectSection).Key("dsn").String()
 	return Port
+}
+
+func Params(c *gin.Context, key string) interface{} {
+	json := make(map[string]interface{})
+	_ = c.BindJSON(&json)
+	return json[key]
 }
