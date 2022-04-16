@@ -40,8 +40,13 @@ func getResumeInfo(c *gin.Context) {
 	 * @Author ZhangZe
 	 **/
 	param := common.Params(c, "search_key")
-	var sql string
-	sql = fmt.Sprint("select * from t_resume where v_company_name like '%", param, "%' or v_position like '%", param, "%' or v_word_content like '%", param, "%'")
+	var whereSql string
+	if param != "" {
+		whereSql = fmt.Sprint(" where v_company_name like '%", param, "%' or v_position like '%", param, "%' or v_word_content like '%", param, "%'")
+	} else {
+		whereSql = ""
+	}
+	sql := fmt.Sprint("select * from t_resume", whereSql)
 	data, err := common.ReadSql(sql)
 	if err != nil {
 		log.Println(err)
