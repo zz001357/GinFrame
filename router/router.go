@@ -6,6 +6,7 @@
 package router
 
 import (
+	"GinFrame/portfolios"
 	"GinFrame/resume"
 	"github.com/gin-gonic/gin"
 	"log"
@@ -22,7 +23,8 @@ func Router(addr string) {
 	}
 }
 func routers(router *gin.Engine) {
-	resume.Api(router)
+	resume.Resume(router)
+	portfolios.Photos(router)
 }
 func Cors() gin.HandlerFunc {
 	return func(context *gin.Context) {

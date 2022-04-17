@@ -24,7 +24,6 @@ func getUserInfo(c *gin.Context) {
 	sql := "select * from t_user_info"
 	data, err := common.ReadSql(sql)
 	if err != nil {
-		log.Println(err)
 		c.JSON(http.StatusOK, common.Response{Code: 1, Message: "查询失败", Data: err})
 	} else {
 		c.JSON(http.StatusOK, common.Response{Code: 0, Message: "查询成功", Data: data})

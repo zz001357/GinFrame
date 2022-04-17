@@ -9,7 +9,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func Api(c *gin.Engine) {
+func Resume(c *gin.Engine) {
 	c.POST("/api/getUserInfo", getUserInfo)     //获取基本信息
 	c.POST("/api/getResumeInfo", getResumeInfo) //获取简历信息
 }
