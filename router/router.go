@@ -6,8 +6,7 @@
 package router
 
 import (
-	"GinFrame/admin"
-	"GinFrame/api"
+	"GinFrame/resume"
 	"github.com/gin-gonic/gin"
 	"log"
 	"net/http"
@@ -23,8 +22,7 @@ func Router(addr string) {
 	}
 }
 func routers(router *gin.Engine) {
-	admin.Admin(router)
-	api.Api(router)
+	resume.Api(router)
 }
 func Cors() gin.HandlerFunc {
 	return func(context *gin.Context) {

@@ -3,7 +3,7 @@
 * @Date: 2022/4/10 21:11
  */
 
-package api
+package resume
 
 import (
 	"GinFrame/common"

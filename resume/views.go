@@ -3,9 +3,11 @@
 * @Date: 2022/4/10 21:11
  */
 
-package api
+package resume
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/gin-gonic/gin"
+)
 
 func Api(c *gin.Engine) {
 	c.POST("/api/getUserInfo", getUserInfo)     //获取基本信息
