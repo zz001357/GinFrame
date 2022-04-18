@@ -10,5 +10,5 @@ import (
 )
 
 func Photos(c *gin.Engine) {
-	c.POST("/api/getPhotosCategory", getPhotosCategory) //获取照片类别
+	c.POST("/api/portfolios/getPhotosCategory", getPhotosCategory) //获取照片类别
 }

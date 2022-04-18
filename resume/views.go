@@ -10,6 +10,6 @@ import (
 )
 
 func Resume(c *gin.Engine) {
-	c.POST("/api/getUserInfo", getUserInfo)     //获取基本信息
-	c.POST("/api/getResumeInfo", getResumeInfo) //获取简历信息
+	c.POST("/api/resume/getUserInfo", getUserInfo)     //获取基本信息
+	c.POST("/api/resume/getResumeInfo", getResumeInfo) //获取简历信息
 }

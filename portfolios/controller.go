@@ -19,7 +19,7 @@ func getPhotosCategory(c *gin.Context) {
 	 * @Date 2022/4/15 15:00
 	 * @Author ZhangZe
 	 **/
-	sql := "select * from t_photos_category order by v_created_time"
+	sql := "select * from t_photos_category where delete_time is null and is_show = '1' order by created_time desc"
 	data, err := common.ReadSql(sql)
 	if err != nil {
 		c.JSON(http.StatusOK, common.Response{Code: 1, Message: "查询失败", Data: err})
