@@ -29,7 +29,7 @@ func getBlogsCategory(c *gin.Context) {
 	}
 }
 
-func getArticleContent(c *gin.Context) {
+func getArticles(c *gin.Context) {
 	/**
 	 * @Name 根据类别获取文章内容
 	 * @Param blog_category_id
@@ -38,8 +38,25 @@ func getArticleContent(c *gin.Context) {
 	 * @Author ZhangZe
 	 **/
 	blogCategoryId := common.Params(c, "blog_category_id")
-	sql := fmt.Sprintf("select * from t_blog_articles where is_show='1' and delete_time is null and blog_category_id='%s'", blogCategoryId)
-	fmt.Println(sql)
+	sql := fmt.Sprintf("select * from t_blog_articles where is_show='1' and delete_time is null and blog_category_id='%s' order by update_time desc", blogCategoryId)
+	data, err := common.ReadSql(sql)
+	if err != nil {
+		c.JSON(http.StatusOK, common.Response{Code: 1, Message: "查询失败", Data: err})
+	} else {
+		c.JSON(http.StatusOK, common.Response{Code: 0, Message: "查询成功", Data: data})
+	}
+}
+
+func getArticleContent(c *gin.Context) {
+	/**
+	 * @Name 根据id获取文章内容
+	 * @Param article_id
+	 * @Return
+	 * @Date 2022/4/18 14:22
+	 * @Author ZhangZe
+	 **/
+	articleId := common.Params(c, "article_id")
+	sql := fmt.Sprintf("select * from t_blog_articles where is_show='1' and delete_time is null and id='%s'", articleId)
 	data, err := common.ReadSql(sql)
 	if err != nil {
 		c.JSON(http.StatusOK, common.Response{Code: 1, Message: "查询失败", Data: err})

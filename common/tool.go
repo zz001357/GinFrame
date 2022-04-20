@@ -24,8 +24,22 @@ func GetMysql(filename, expectSection string) string {
 	return Port
 }
 
-func Params(c *gin.Context, key string) interface{} {
+func Params(c *gin.Context, key string) string {
 	json := make(map[string]interface{})
 	_ = c.BindJSON(&json)
-	return json[key]
+	param := json[key].(string)
+	return param
+}
+
+type Response struct {
+	Code    int         `json:"code"`
+	Message string      `json:"message"`
+	Data    interface{} `json:"data"`
+}
+
+func (r Response) Result(code int, message string, data interface{}) Response {
+	r.Code = code
+	r.Message = message
+	r.Data = data
+	return r
 }
