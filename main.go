@@ -21,7 +21,7 @@ func main() {
 	folderPath := filepath.Join("./", "log")
 	_, err := os.Stat(folderPath)
 	if os.IsNotExist(err) {
-		_ = os.Mkdir(folderPath, os.ModePerm)
+		_ = os.MkdirAll(folderPath, os.ModePerm)
 	}
 	fName := time.Now().Format("2006-01-02")
 	f, _ := os.Create("./log/" + fName + ".log")

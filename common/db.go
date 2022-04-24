@@ -14,20 +14,17 @@ import (
 var db *sql.DB
 var err error
 
-func init() {
-	sourceName := GetMysql("./mysql.ini", "dev")
-	db, err = sql.Open("mysql", sourceName)
-	if err != nil {
-		log.Fatal("数据库链接错误！", err)
-		return
-	}
-}
-
 //查询
 
-func ReadSql(sql string) ([]map[string]string, error) {
+func ReadSql(statement string, dbConnection string) ([]map[string]string, error) {
 	var records []map[string]string
-	data, err := db.Query(sql)
+
+	db, err = sql.Open("mysql", dbConnection)
+	if err != nil {
+		log.Fatal("数据库链接错误！", err)
+		return records, err
+	}
+	data, err := db.Query(statement)
 	if err != nil {
 		return records, err
 	}
@@ -52,5 +49,6 @@ func ReadSql(sql string) ([]map[string]string, error) {
 		}
 		records = append(records, record)
 	}
+	_ = db.Close()
 	return records, err
 }
