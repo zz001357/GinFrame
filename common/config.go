@@ -5,8 +5,12 @@
 
 package common
 
-func Connection(key string) string {
-	m := make(map[string]string)
-	m["go_frame"] = "root:123456@tcp(127.0.0.1:3306)/go_frame?charset=utf8mb4&parseTime=True&loc=Local"
-	return m[key]
+type connection struct {
+	GoFrame string
+}
+
+func Connection() *connection {
+	con := new(connection)
+	con.GoFrame = "root:123456@tcp(127.0.0.1:3306)/go_frame?charset=utf8mb4&parseTime=True&loc=Local"
+	return con
 }

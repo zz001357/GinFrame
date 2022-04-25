@@ -11,22 +11,23 @@ import (
 	"log"
 )
 
-var db *sql.DB
-var err error
+func openSql(dbConnection string) *sql.DB {
+	db, sqlErr := sql.Open("mysql", dbConnection)
+	if sqlErr != nil {
+		log.Fatal("数据库链接错误！", sqlErr)
+	}
+	return db
+}
 
 //查询
 
-func ReadSql(statement string, dbConnection string) ([]map[string]string, error) {
+func ReadSql(sql string, dbConnection string) ([]map[string]string, error) {
 	var records []map[string]string
-
-	db, err = sql.Open("mysql", dbConnection)
-	if err != nil {
-		log.Fatal("数据库链接错误！", err)
-		return records, err
-	}
-	data, err := db.Query(statement)
-	if err != nil {
-		return records, err
+	db := openSql(dbConnection)
+	data, queryErr := db.Query(sql)
+	if queryErr != nil {
+		log.Println("查询错误！", queryErr)
+		return records, queryErr
 	}
 	columns, _ := data.Columns()
 	scanArgs := make([]interface{}, len(columns))
@@ -39,7 +40,7 @@ func ReadSql(statement string, dbConnection string) ([]map[string]string, error)
 	}
 	for data.Next() {
 		record := make(map[string]string)
-		err = data.Scan(scanArgs...)
+		_ = data.Scan(scanArgs...)
 		//因为这里的values的每个值的地址对应的是scanArgs
 		for i, col := range values {
 			if col != nil {
@@ -50,5 +51,18 @@ func ReadSql(statement string, dbConnection string) ([]map[string]string, error)
 		records = append(records, record)
 	}
 	_ = db.Close()
-	return records, err
+	return records, nil
+}
+
+//插入
+
+func InsertSql(sql string, dbConnection string) error {
+	db := openSql(dbConnection)
+	_, err := db.Exec(sql)
+	if err != nil {
+		log.Println(err)
+		return err
+	}
+	_ = db.Close()
+	return nil
 }

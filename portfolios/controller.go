@@ -7,6 +7,7 @@ package portfolios
 
 import (
 	"GinFrame/common"
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"log"
 	"net/http"
@@ -25,9 +26,8 @@ func getPhotosCategory(c *gin.Context) {
 	 * @Author ZhangZe
 	 **/
 	sql := "select * from t_photos_category where delete_time is null and is_show = '1' order by created_time desc"
-	data, err := common.ReadSql(sql, common.Connection("go_frame"))
+	data, err := common.ReadSql(sql, common.Connection().GoFrame)
 	if err != nil {
-		log.Println(err)
 		c.JSON(http.StatusOK, common.Response{Code: 1, Message: "查询失败", Data: err})
 	} else {
 		c.JSON(http.StatusOK, common.Response{Code: 0, Message: "查询成功", Data: data})
@@ -35,17 +35,23 @@ func getPhotosCategory(c *gin.Context) {
 }
 
 func getPhotos(c *gin.Context) {
+	/**
+	 * @Name 根据类别获取图片
+	 * @Param
+	 * @Return
+	 * @Date 2022/4/24 21:59
+	 * @Author ZhangZe
+	 **/
 	sql := "select * from t_photos"
-	data, err := common.ReadSql(sql, common.Connection("go_frame"))
+	data, err := common.ReadSql(sql, common.Connection().GoFrame)
 	if err != nil {
-		log.Println(err)
 		c.JSON(http.StatusOK, common.Response{Code: 1, Message: "查询失败", Data: err})
 	} else {
 		c.JSON(http.StatusOK, common.Response{Code: 0, Message: "查询成功", Data: data})
 	}
 }
 
-func UploadImg(c *gin.Context) {
+func uploadImg(c *gin.Context) {
 	/**
 	 * @Name 上传作品图片
 	 * @Param
@@ -76,5 +82,27 @@ func UploadImg(c *gin.Context) {
 			log.Println(uploadedErr)
 			c.JSON(http.StatusOK, common.Response{Code: 1, Message: "上传失败！", Data: uploadedErr})
 		}
+	}
+}
+
+func saveImg(c *gin.Context) {
+	/**
+	 * @Name 保存图片
+	 * @Param
+	 * @Return
+	 * @Date 2022/4/24 21:58
+	 * @Author ZhangZe
+	 **/
+	photoAlt := common.Params(c, "v_photo_alt")              //描述
+	photoUrl := common.Params(c, "v_photo_url")              //连接
+	photoCategoryID := common.Params(c, "photo_category_id") //类别ID
+	uploadTime := time.Now().Format("2006-01-02 15:04:05")   //上传时间
+
+	sql := fmt.Sprintf("insert into t_photos(photo_category_id,v_photo_alt,v_photo_url,upload_time) values('%s','%s','%s','%s')", photoCategoryID, photoAlt, photoUrl, uploadTime)
+	err := common.InsertSql(sql, common.Connection().GoFrame)
+	if err != nil {
+		c.JSON(http.StatusOK, common.Response{Code: 1, Message: "同步失败！", Data: err})
+	} else {
+		c.JSON(http.StatusOK, common.Response{Code: 1, Message: "同步成功！", Data: nil})
 	}
 }
