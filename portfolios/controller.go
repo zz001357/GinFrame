@@ -37,12 +37,13 @@ func getPhotosCategory(c *gin.Context) {
 func getPhotos(c *gin.Context) {
 	/**
 	 * @Name 根据类别获取图片
-	 * @Param
+	 * @Param	photo_category_id	string	类别ID
 	 * @Return
 	 * @Date 2022/4/24 21:59
 	 * @Author ZhangZe
 	 **/
-	sql := "select * from t_photos"
+	photoCategoryID := common.Params(c, "photo_category_id")
+	sql := fmt.Sprintf("select * from t_photos where photo_category_id ='%s'", photoCategoryID)
 	data, err := common.ReadSql(sql, common.Connection().GoFrame)
 	if err != nil {
 		c.JSON(http.StatusOK, common.Response{Code: 1, Message: "查询失败", Data: err})
@@ -54,7 +55,8 @@ func getPhotos(c *gin.Context) {
 func uploadImg(c *gin.Context) {
 	/**
 	 * @Name 上传作品图片
-	 * @Param
+	 * @Param	img_file	file	图片
+	 * @Param	img_category	string	图片类别名
 	 * @Return
 	 * @Date 2022/4/21 21:00
 	 * @Author ZhangZe
@@ -88,15 +90,17 @@ func uploadImg(c *gin.Context) {
 func saveImg(c *gin.Context) {
 	/**
 	 * @Name 保存图片
-	 * @Param
+	 * @Param	v_photo_alt	string	图片描述
+	 * @Param	v_photo_alt	string	图片链接
+	 * @Param	photo_category_id	string	类别ID
 	 * @Return
 	 * @Date 2022/4/24 21:58
 	 * @Author ZhangZe
 	 **/
-	photoAlt := common.Params(c, "v_photo_alt")              //描述
-	photoUrl := common.Params(c, "v_photo_url")              //连接
-	photoCategoryID := common.Params(c, "photo_category_id") //类别ID
-	uploadTime := time.Now().Format("2006-01-02 15:04:05")   //上传时间
+	photoAlt := common.Params(c, "v_photo_alt")
+	photoUrl := common.Params(c, "v_photo_url")
+	photoCategoryID := common.Params(c, "photo_category_id")
+	uploadTime := time.Now().Format("2006-01-02 15:04:05") //上传时间
 
 	sql := fmt.Sprintf("insert into t_photos(photo_category_id,v_photo_alt,v_photo_url,upload_time) values('%s','%s','%s','%s')", photoCategoryID, photoAlt, photoUrl, uploadTime)
 	err := common.InsertSql(sql, common.Connection().GoFrame)

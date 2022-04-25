@@ -32,7 +32,7 @@ func getBlogsCategory(c *gin.Context) {
 func getArticles(c *gin.Context) {
 	/**
 	 * @Name 根据类别获取文章内容
-	 * @Param blog_category_id
+	 * @Param blog_category_id	string	博客类别id
 	 * @Return
 	 * @Date 2022/4/18 14:22
 	 * @Author ZhangZe
@@ -50,7 +50,7 @@ func getArticles(c *gin.Context) {
 func getArticleContent(c *gin.Context) {
 	/**
 	 * @Name 根据id获取文章内容
-	 * @Param article_id
+	 * @Param article_id	string	文章id
 	 * @Return
 	 * @Date 2022/4/18 14:22
 	 * @Author ZhangZe

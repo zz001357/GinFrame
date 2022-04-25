@@ -32,7 +32,7 @@ func getUserInfo(c *gin.Context) {
 func getResumeInfo(c *gin.Context) {
 	/**
 	 * @Name 获取简历信息
-	 * @Param
+	 * @Param	search_key	string	模糊搜索关键字
 	 * @Return
 	 * @Date 2022/4/11 15:01
 	 * @Author ZhangZe
