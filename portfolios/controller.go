@@ -45,6 +45,7 @@ func getPhotos(c *gin.Context) {
 	photoCategoryID := common.Params(c, "photo_category_id")
 	sql := fmt.Sprintf("select * from t_photos where photo_category_id ='%s'", photoCategoryID)
 	data, err := common.ReadSql(sql, common.Connection().GoFrame)
+	fmt.Println(data[0]["v_photo_url"])
 	if err != nil {
 		c.JSON(http.StatusOK, common.Response{Code: 1, Message: "查询失败", Data: err})
 	} else {
