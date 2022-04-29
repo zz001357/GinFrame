@@ -9,8 +9,9 @@ import (
 	"GinFrame/common"
 	"fmt"
 	"github.com/gin-gonic/gin"
-	"net/http"
 )
+
+var serviceName = "Resume"
 
 func getUserInfo(c *gin.Context) {
 	/**
@@ -21,11 +22,11 @@ func getUserInfo(c *gin.Context) {
 	 * @Author ZhangZe
 	 **/
 	sql := "select * from t_user_info"
-	data, err := common.ReadSql(sql, common.Connection().GoFrame)
+	data, err := common.ReadSql(sql, common.Connection().GveResume)
 	if err != nil {
-		c.JSON(http.StatusOK, common.Response{Code: 1, Message: "查询失败", Data: err})
+		common.Failure(c, serviceName, err)
 	} else {
-		c.JSON(http.StatusOK, common.Response{Code: 0, Message: "查询成功", Data: data})
+		common.Success(c, serviceName, data)
 	}
 }
 
@@ -45,10 +46,10 @@ func getResumeInfo(c *gin.Context) {
 		whereSql = ""
 	}
 	sql := fmt.Sprint("select * from t_resume", whereSql)
-	data, err := common.ReadSql(sql, common.Connection().GoFrame)
+	data, err := common.ReadSql(sql, common.Connection().GveResume)
 	if err != nil {
-		c.JSON(http.StatusOK, common.Response{Code: 1, Message: "查询失败", Data: err})
+		common.Failure(c, serviceName, err)
 	} else {
-		c.JSON(http.StatusOK, common.Response{Code: 0, Message: "查询成功", Data: data})
+		common.Success(c, serviceName, data)
 	}
 }

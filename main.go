@@ -17,7 +17,6 @@ func main() {
 	 * @Date 2022/4/9 23:57
 	 * @Author ZhangZe
 	 **/
-	gin.DisableConsoleColor()
 	folderPath := filepath.Join("./", "log")
 	_, err := os.Stat(folderPath)
 	if os.IsNotExist(err) {
