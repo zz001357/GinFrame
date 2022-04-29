@@ -16,8 +16,8 @@ import (
 
 func Router(addr string) {
 	r := gin.Default()
-	r.Use(Cors())                           //开启中间件 允许使用跨域请求
-	r.StaticFS("/imgs", http.Dir("./imgs")) //图片改为静态文件
+	r.Use(Cors())                         //开启中间件 允许使用跨域请求
+	r.StaticFS("/img", http.Dir("./img")) //图片改为静态文件
 	routers(r)
 	if err := r.Run(addr); err != nil {
 		log.Fatal("程序启动失败:", err)

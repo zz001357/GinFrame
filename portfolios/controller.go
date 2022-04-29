@@ -25,7 +25,9 @@ func getPhotosCategory(c *gin.Context) {
 	 * @Date 2022/4/15 15:00
 	 * @Author ZhangZe
 	 **/
-	sql := "select * from t_photos_category where delete_time is null and is_show = '1' order by created_time desc"
+	sql := "SELECT a.id AS id,a.v_category_name AS v_category_name,b.v_photo_url FROM t_photos_category a LEFT JOIN " +
+		"(select photo_category_id,v_photo_url from t_photos where is_first = 1 ) b ON a.id = b.photo_category_id  WHERE a.delete_time IS NULL " +
+		"AND a.is_show = '1' ORDER BY created_time DESC"
 	data, err := common.ReadSql(sql, common.Connection().GoFrame)
 	if err != nil {
 		c.JSON(http.StatusOK, common.Response{Code: 1, Message: "查询失败", Data: err})
@@ -45,7 +47,6 @@ func getPhotos(c *gin.Context) {
 	photoCategoryID := common.Params(c, "photo_category_id")
 	sql := fmt.Sprintf("select * from t_photos where photo_category_id ='%s'", photoCategoryID)
 	data, err := common.ReadSql(sql, common.Connection().GoFrame)
-	fmt.Println(data[0]["v_photo_url"])
 	if err != nil {
 		c.JSON(http.StatusOK, common.Response{Code: 1, Message: "查询失败", Data: err})
 	} else {
@@ -57,13 +58,11 @@ func uploadImg(c *gin.Context) {
 	/**
 	 * @Name 上传作品图片
 	 * @Param	img_file	file	图片
-	 * @Param	img_category	string	图片类别名
 	 * @Return
 	 * @Date 2022/4/21 21:00
 	 * @Author ZhangZe
 	 **/
 	img, err := c.FormFile("img_file")
-	imgCategory := c.PostForm("img_category")
 	if err != nil {
 		log.Println(err)
 		c.JSON(http.StatusOK, common.Response{Code: 1, Message: "上传失败", Data: err})
@@ -72,12 +71,12 @@ func uploadImg(c *gin.Context) {
 		if fileExt != ".png" && fileExt != ".jpg" && fileExt != ".gif" && fileExt != ".jpeg" {
 			c.JSON(http.StatusOK, common.Response{Code: 0, Message: "文件类型错误，上传失败！", Data: nil})
 		}
-		folderPath := filepath.Join("./imgs/", "portfolios", imgCategory)
+		folderPath := "img/portfolios/" + time.Now().Format("2006-01-02")
 		_, errPath := os.Stat(folderPath) //Stat返回描述文件f的FileInfo类型值。如果出错，错误底层类型是*PathError。代表路径错误，可能是路径不存在
 		if os.IsNotExist(errPath) {
 			_ = os.MkdirAll(folderPath, os.ModePerm)
 		}
-		savePath := folderPath + "\\" + time.Now().Format("20060102150405") + "_" + img.Filename
+		savePath := folderPath + "/" + time.Now().Format("20060102150405") + "_" + img.Filename
 		uploadedErr := c.SaveUploadedFile(img, savePath)
 		if uploadedErr == nil {
 			c.JSON(http.StatusOK, common.Response{Code: 0, Message: "上传成功！", Data: savePath})
@@ -102,7 +101,6 @@ func saveImg(c *gin.Context) {
 	photoUrl := common.Params(c, "v_photo_url")
 	photoCategoryID := common.Params(c, "photo_category_id")
 	uploadTime := time.Now().Format("2006-01-02 15:04:05") //上传时间
-
 	sql := fmt.Sprintf("insert into t_photos(photo_category_id,v_photo_alt,v_photo_url,upload_time) values('%s','%s','%s','%s')", photoCategoryID, photoAlt, photoUrl, uploadTime)
 	err := common.InsertSql(sql, common.Connection().GoFrame)
 	if err != nil {
