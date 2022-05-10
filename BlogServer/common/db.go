@@ -14,22 +14,24 @@ import (
 func openSql(dbConnection string) *sql.DB {
 	db, sqlErr := sql.Open("mysql", dbConnection)
 	if sqlErr != nil {
-		log.Fatal("数据库链接错误！", sqlErr)
+		log.Println("数据库连接出错！")
+		panic(sqlErr)
 	}
 	return db
 }
 
 //查询
 
-func ReadSql(sql string, dbConnection string) ([]map[string]string, error) {
+func ReadSql(sql string, dbConnection string) ([]string, []map[string]string, error) {
 	var records []map[string]string
+	var columns []string //数据库列
 	db := openSql(dbConnection)
 	data, queryErr := db.Query(sql)
 	if queryErr != nil {
 		log.Println("查询错误！", queryErr)
-		return records, queryErr
+		return columns, records, queryErr
 	}
-	columns, _ := data.Columns()
+	columns, _ = data.Columns()
 	scanArgs := make([]interface{}, len(columns))
 	values := make([]interface{}, len(columns))
 
@@ -38,6 +40,7 @@ func ReadSql(sql string, dbConnection string) ([]map[string]string, error) {
 	for i := range values {
 		scanArgs[i] = &values[i]
 	}
+	//获得数据
 	for data.Next() {
 		record := make(map[string]string)
 		_ = data.Scan(scanArgs...)
@@ -51,7 +54,7 @@ func ReadSql(sql string, dbConnection string) ([]map[string]string, error) {
 		records = append(records, record)
 	}
 	_ = db.Close()
-	return records, nil
+	return columns, records, nil
 }
 
 //插入
