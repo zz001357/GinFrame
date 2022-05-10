@@ -1,0 +1,7 @@
+Url:
+  devUrl: "192.168.2.135"
+  proUrl: "43.136.130.96"
+
+Mysql:
+  dev: "root:123456@tcp(127.0.0.1:3306)/gve_blog?charset=utf8mb4&parseTime=True&loc=Local"
+  pro: "root:123456@tcp(43.136.130.96:3306)/gve_blog?charset=utf8mb4&parseTime=True&loc=Local"

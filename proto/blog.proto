@@ -1,0 +1,74 @@
+syntax = "proto3";
+
+package blog;
+
+option go_package = "./";
+//定义rpc接口
+service Blog {
+  rpc GetBlogsCategory (BlogsCategoryRequest) returns (BlogsCategoryReply) {} //获取博文类别
+  rpc GetArticles (ArticlesRequest) returns (ArticlesReply) {} //根据类别Id获取栏目信息
+  rpc getArticleContent (ArticlesContentRequest) returns (ArticlesContentReply) {} //根据id获取文章内容
+};
+
+//-----------------------获取博文类别 start------------------
+//Reply协议内容
+message BlogsCategoryReply {
+  string name = 1;
+  string message = 2;
+  repeated OutData data = 3;
+}
+message OutData{
+  string id = 1;
+  string v_category_name = 2;
+  string create_time = 3;
+  string is_show = 4;
+}
+//Request协议
+message BlogsCategoryRequest {
+  string name = 1;
+  string message = 2;
+}
+//-----------------------获取博文类别 end------------------
+
+
+//-----------------------根据类别Id获取栏目信息 start------------------
+message ArticlesRequest{
+  string name = 1;
+  string message = 2;
+  string blog_category_id = 3;  //博客类别id
+}
+message ArticlesReply{
+  string name = 1;
+  string message = 2;
+  repeated OutArticles data = 3;
+}
+message OutArticles{
+  string id = 1;
+  string blog_category_id = 2;
+  string v_article_name = 3;
+  string update_time = 4;
+  string visit_count = 5;
+  string v_abstract = 6;
+}
+//-----------------------根据类别Id获取栏目信息 end------------------
+
+
+//-----------------------根据id获取文章内容 start------------------
+message ArticlesContentRequest{
+  string name = 1;
+  string message = 2;
+  string article_id = 3;  //文章id
+}
+message ArticlesContentReply{
+  string name = 1;
+  string message = 2;
+  repeated OutArticlesContent data = 3;
+}
+message OutArticlesContent{
+  string id = 1;
+  string blog_category_id = 2;
+  string v_article_name = 3;
+  string update_time = 4;
+  string visit_count = 5;
+  string v_article_content = 6;
+}
