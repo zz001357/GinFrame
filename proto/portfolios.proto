@@ -1,0 +1,48 @@
+syntax = "proto3";
+package portfolios;
+option go_package = "./";
+
+service Portfolios{
+  rpc GetImgCategory(ImgCategoryRequest) returns(ImgCategoryReply){}//获取照片类别
+  rpc GetImgByCategory(ImgRequest) returns(ImgReply){}//根据类别Id获取图片
+};
+
+//-------------------------------获取照片类别 start----------------
+message ImgCategoryRequest{
+  string name = 1;
+  string message = 2;
+}
+message ImgCategoryReply{
+  string name = 1;
+  string message = 2;
+  repeated OutImgCategory data = 3;
+}
+message OutImgCategory{
+  string id = 1;
+  string v_category_name = 2;
+  string v_photo_url = 3;
+}
+//-------------------------------获取照片类别 end----------------
+
+//-------------------------------根据类别Id获取图片 start----------------
+message ImgRequest{
+  string name = 1;
+  string message = 2;
+  string img_category_id = 3;
+}
+message ImgReply{
+  string name = 1;
+  string message = 2;
+  repeated OutImg data = 3;
+}
+message OutImg{
+  string id = 1;
+  string photo_category_id = 2;
+  string v_photo_alt = 3;
+  string v_photo_url = 4;
+  string upload_time = 5;
+  string is_first = 6;
+  string delete_time = 7;
+}
+//-------------------------------获取照片类别 end----------------
+

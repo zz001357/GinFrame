@@ -20,6 +20,7 @@ import (
 const clientAddr = "192.168.2.135:5000"
 const BlogServerAddr = "192.168.2.135:8005"
 const ResumeServerAddr = "192.168.2.135:8006"
+const PortfoliosServerAddr = "192.168.2.135:8007"
 
 func main() {
 	/**
@@ -34,6 +35,8 @@ func main() {
 	defer conn1.Close()
 	conn2 := conn(ResumeServerAddr)
 	defer conn2.Close()
+	conn3 := conn(PortfoliosServerAddr)
+	defer conn2.Close()
 	//设置超时时间
 	_, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
@@ -45,12 +48,13 @@ func main() {
 		_ = os.MkdirAll(folderPath, os.ModePerm)
 	}
 	fName := time.Now().Format("2006-01-02")
-	f, _ := os.Create("./Client/log/" + fName + ".log")
+	f, _ := os.Create("./log/" + fName + ".log")
 	gin.DefaultWriter = io.MultiWriter(f)
 	gin.DefaultWriter = io.MultiWriter(f, os.Stdout)
 
 	api.BlogView(r, conn1)
 	api.ResumeView(r, conn2)
+	api.PortfoliosView(r, conn3)
 
 	if err := r.Run(clientAddr); err != nil {
 		log.Fatal("程序启动失败:", err)
