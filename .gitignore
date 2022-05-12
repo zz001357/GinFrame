@@ -3,5 +3,6 @@ log
 .air.conf
 air.exe
 tmp
-GvePortfolios/img
+img
 config.yaml
+shell
