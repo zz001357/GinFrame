@@ -4,5 +4,5 @@ log
 air.exe
 tmp
 img
-config.yaml
+*.yaml
 shell
