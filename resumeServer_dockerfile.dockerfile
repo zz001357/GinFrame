@@ -19,14 +19,14 @@ WORKDIR $APP_PATH/ResumeServer
 RUN go env -w GOPROXY=https://goproxy.cn,direct  \
     && go env -w GO111MODULE=on \
     && go mod download \
-    && go build
+    && go build -o app
 
 
 
 
 #第二阶段构建运行
 FROM scratch
-COPY --from=0 $GOPATH/GinFrame/ResumeServer/ResumeServer /
+COPY --from=0 $GOPATH/GinFrame/ResumeServer/app /
 RUN ls
 EXPOSE 8006
 # 运行golang程序的命令
