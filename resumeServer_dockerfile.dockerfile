@@ -19,8 +19,7 @@ WORKDIR $APP_PATH/ResumeServer
 RUN go env -w GOPROXY=https://goproxy.cn,direct  \
     && go env -w GO111MODULE=on \
     && go mod download \
-    && go build \
-
+    && go build
 RUN ls
 
 
