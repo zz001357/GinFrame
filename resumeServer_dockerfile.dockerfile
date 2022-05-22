@@ -14,13 +14,15 @@ COPY go.sum .
 COPY go.mod .
 
 WORKDIR $APP_PATH/ResumeServer
-RUN ls
 
 #设置go的一些常用环境
 RUN go env -w GOPROXY=https://goproxy.cn,direct  \
     && go env -w GO111MODULE=on \
     && go mod download \
-    && go build
+    && go build \
+
+RUN ls
+
 
 
 
