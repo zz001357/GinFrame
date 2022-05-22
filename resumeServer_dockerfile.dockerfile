@@ -26,7 +26,7 @@ RUN go env -w GOPROXY=https://goproxy.cn,direct  \
 
 #第二阶段构建运行
 FROM scratch
-COPY --from=0 $GOPATH/GinFrame/ResumeServer /resumeServer
+COPY --from=0 $GOPATH/GinFrame/ResumeServer/ResumeServer /
 RUN ls
 EXPOSE 8006
 # 运行golang程序的命令
