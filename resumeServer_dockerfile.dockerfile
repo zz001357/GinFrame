@@ -4,6 +4,7 @@
 FROM golang:latest as build-env
 MAINTAINER ZhangZe "407102799@qq.com"
 
+RUN go env
 ENV APP_PATH=$GOPATH/GinFrame
 # 在容器根目录 操作
 WORKDIR $APP_PATH
