@@ -5,6 +5,7 @@ FROM golang:latest as build-env
 MAINTAINER ZhangZe "407102799@qq.com"
 
 ENV APP_PATH=$GOPATH/GinFrame
+RUN APP_PATH
 # 在容器根目录 操作
 WORKDIR $APP_PATH
 #COPY <相对Dockerfile的文件路径 电脑位置> <docker位置 文件放置位置>
@@ -20,7 +21,8 @@ RUN ls
 RUN go env -w GOPROXY=https://goproxy.cn,direct  \
     && go env -w GO111MODULE=on \
     && go mod download \
-    && cd ResumeServer \
+    && go build
+
 
 
 #第二阶段构建运行
