@@ -19,7 +19,7 @@ func BlogView(r *gin.Engine, conn *grpc.ClientConn) {
 	//创建RPC客户端
 	client := pb.NewBlogClient(conn)
 	//获取博文类别
-	r.POST("/api/blog/getBlogsCategory", func(c *gin.Context) {
+	r.POST("/handle/blog/getBlogsCategory", func(c *gin.Context) {
 		/**
 		 * @Name 获取博文类别
 		 * @Param
@@ -40,7 +40,7 @@ func BlogView(r *gin.Engine, conn *grpc.ClientConn) {
 	/*---------------------------文章内容接口相关---------------------------*/
 
 	//根据类别Id获取栏目信息
-	r.POST("/api/blog/getArticles", func(c *gin.Context) {
+	r.POST("/handle/blog/getArticles", func(c *gin.Context) {
 		/**
 		 * @Name 根据类别获取文章内容
 		 * @Param blog_category_id	string	博客类别id
@@ -59,7 +59,7 @@ func BlogView(r *gin.Engine, conn *grpc.ClientConn) {
 		}
 	})
 	//根据id获取文章内容
-	r.POST("/api/blog/getArticleContent", func(c *gin.Context) {
+	r.POST("/handle/blog/getArticleContent", func(c *gin.Context) {
 		/**
 		 * @Name 根据id获取文章内容
 		 * @Param article_id	string	文章id

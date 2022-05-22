@@ -19,7 +19,7 @@ func ResumeView(r *gin.Engine, conn *grpc.ClientConn) {
 	//创建RPC客户端
 	client := pb.NewResumeClient(conn)
 	//获取基本信息
-	r.POST("/api/resume/getBaseInfo", func(c *gin.Context) {
+	r.POST("/handle/resume/getBaseInfo", func(c *gin.Context) {
 		/**
 		 * @Name 获取基本信息
 		 * @Param
@@ -38,7 +38,7 @@ func ResumeView(r *gin.Engine, conn *grpc.ClientConn) {
 	})
 
 	//获取简历信息
-	r.POST("/api/resume/getResumeInfo", func(c *gin.Context) {
+	r.POST("/handle/resume/getResumeInfo", func(c *gin.Context) {
 		/**
 		 * @Name 获取简历信息
 		 * @Param	search_key	string	模糊搜索关键字

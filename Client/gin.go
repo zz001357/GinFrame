@@ -7,7 +7,6 @@ package main
 
 import (
 	"GinFrame/Client/api"
-	"context"
 	"github.com/gin-gonic/gin"
 	"google.golang.org/grpc"
 	"io"
@@ -37,9 +36,7 @@ func main() {
 	defer conn2.Close()
 	conn3 := conn(PortfoliosServerAddr)
 	defer conn2.Close()
-	//设置超时时间
-	_, cancel := context.WithTimeout(context.Background(), time.Second)
-	defer cancel()
+
 	r := gin.Default()
 	r.Use(cors()) //开启中间件 允许使用跨域请求
 	folderPath := "./Client/log"

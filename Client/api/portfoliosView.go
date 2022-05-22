@@ -20,7 +20,7 @@ func PortfoliosView(r *gin.Engine, conn *grpc.ClientConn) {
 	client := pb.NewPortfoliosClient(conn)
 
 	//获取照片类别
-	r.POST("/api/portfolios/getImgCategory", func(c *gin.Context) {
+	r.POST("/handle/portfolios/getImgCategory", func(c *gin.Context) {
 		/**
 		 * @Name 获取照片类别
 		 * @Param
@@ -37,7 +37,7 @@ func PortfoliosView(r *gin.Engine, conn *grpc.ClientConn) {
 		}
 	})
 	//根据类别Id获取图片
-	r.POST("/api/portfolios/getImg", func(c *gin.Context) {
+	r.POST("/handle/portfolios/getImg", func(c *gin.Context) {
 		/**
 		 * @Name 根据类别Id获取图片
 		 * @Param	img_category_id	string	类别ID
