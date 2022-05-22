@@ -4,8 +4,7 @@
 FROM golang:latest as build-env
 MAINTAINER ZhangZe "407102799@qq.com"
 
-RUN go env
-ENV APP_PATH=$GOPATH/GinFrame
+ENV APP_PATH=/GinFrame
 # 在容器根目录 操作
 WORKDIR $APP_PATH
 #COPY <相对Dockerfile的文件路径 电脑位置> <docker位置 文件放置位置>
@@ -27,7 +26,7 @@ RUN go env -w GOPROXY=https://goproxy.cn,direct  \
 
 #第二阶段构建运行
 FROM scratch
-COPY --from=0 $GOPATH/GinFrame/ResumeServer/app /
+COPY --from=0 /GinFrame/ResumeServer/app /
 RUN ls
 EXPOSE 8006
 # 运行golang程序的命令
