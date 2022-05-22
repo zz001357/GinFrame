@@ -1,26 +1,16 @@
-FROM golang:alpine3.15
+FROM alpine:last
 
-MAINTAINER zhangze
+MAINTAINER ZhangZe "407102799@qq.com"
 
-RUN mkdir "GinFrmae"
-
+# 在容器根目录 创建一个 GinFrame 目录和子目录ResumeServer
 WORKDIR /GinFrame
-
-#添加go.mod go.sum
-ADD . go.mod
-ADD . go.sum
-
-#运行go mod
-#RUN go mod download
-
-RUN mkdir "ResumeServer"
 WORKDIR /ResumeServer
 
-COPY . .
+#COPY <相对Dockerfile的文件路径> <文件放置位置>
+COPY ./resume .
 
 EXPOSE 8006
 
-ENTRYPOINT ["./server.go"]
-
-
+# 运行golang程序的命令
+ENTRYPOINT ["/GinFrame/ResumeServer/resume"]
 
