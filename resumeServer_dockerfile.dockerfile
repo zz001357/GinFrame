@@ -12,9 +12,9 @@ COPY ResumeServer ./ResumeServer
 COPY proto ./proto
 COPY go.sum .
 COPY go.mod .
-RUN ls
 
-WORKDIR $APP_PATH/GinFrame/ResumeServer
+WORKDIR $APP_PATH/ResumeServer
+RUN ls
 
 #设置go的一些常用环境
 RUN go env -w GOPROXY=https://goproxy.cn,direct  \
