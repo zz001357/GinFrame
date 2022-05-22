@@ -13,13 +13,15 @@ COPY proto ./proto
 COPY go.sum .
 COPY go.mod .
 
+WORKDIR $APP_PATH/GinFrame/ResumeServer
+RUN ls
+
 #设置go的一些常用环境
 RUN go env -w GOPROXY=https://goproxy.cn,direct  \
     && go env -w GO111MODULE=on \
     && go mod download \
     && cd ResumeServer \
-    && go build
-RUN ls
+
 
 #第二阶段构建运行
 FROM scratch
