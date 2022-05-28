@@ -16,10 +16,10 @@ import (
 	"time"
 )
 
-const clientAddr = "192.168.2.135:5000"
-const BlogServerAddr = "192.168.2.135:8005"
-const ResumeServerAddr = "192.168.2.135:8006"
-const PortfoliosServerAddr = "192.168.2.135:8007"
+const clientAddr = ":5000"
+const BlogServerAddr = "gve_blog:8005"
+const ResumeServerAddr = "gve_resume:8006"
+const PortfoliosServerAddr = "gve_portfolios:8007"
 
 func main() {
 	/**
@@ -58,10 +58,12 @@ func main() {
 	}
 }
 
-func conn(addr string) *grpc.ClientConn {
+func conn(ip string) *grpc.ClientConn {
 	//创建一个grpc连接
 	//grpc.WithInsecure()取消明文检测
-	conn, errGrpc := grpc.Dial(addr, grpc.WithInsecure())
+
+	conn, errGrpc := grpc.Dial(ip, grpc.WithInsecure())
+
 	if errGrpc != nil {
 		panic(errGrpc)
 	}

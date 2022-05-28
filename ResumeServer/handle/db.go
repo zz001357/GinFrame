@@ -7,15 +7,17 @@ package handle
 
 import (
 	"database/sql"
+	"fmt"
 	_ "github.com/go-sql-driver/mysql"
 	"log"
-	"os"
+	"runtime"
 )
 
 func Connection() string {
 	var sqlConfig string
-	sysType := os.Getenv("GDMSESSION")
-	if sysType == "ubuntu" {
+	fmt.Println()
+	goos := runtime.GOOS
+	if goos == "windows" {
 		sqlConfig = Config().GetString("Mysql.dev")
 	} else {
 		sqlConfig = Config().GetString("Mysql.pro")
