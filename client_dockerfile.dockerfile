@@ -24,6 +24,11 @@ RUN go env -w GOPROXY=https://goproxy.cn,direct  \
 #第二阶段构建运行
 FROM alpine:latest as runner
 RUN mkdir /lib64 && ln -s /lib/libc.musl-x86_64.so.1 /lib64/ld-linux-x86-64.so.2
+#设置时区
+RUN apk add --no-cache tzdata \
+    && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
+    && echo "Asia/Shanghai" > /etc/timezone \
+    && apk del tzdata
 COPY --from=0 /GinFrame/Client/client /
 EXPOSE 5000
 # 运行golang程序的命令

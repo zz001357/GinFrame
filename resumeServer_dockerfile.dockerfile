@@ -3,7 +3,6 @@
 #第一阶段构建golang的应用程序
 FROM golang:latest as build-env
 MAINTAINER ZhangZe "407102799@qq.com"
-
 ENV APP_PATH=/GinFrame
 # 在容器根目录 操作
 WORKDIR $APP_PATH
@@ -14,7 +13,6 @@ COPY go.sum .
 COPY go.mod .
 
 WORKDIR $APP_PATH/ResumeServer
-
 #设置go的一些常用环境
 RUN go env -w GOPROXY=https://goproxy.cn,direct  \
     && go env -w GO111MODULE=on \
@@ -24,15 +22,16 @@ RUN go env -w GOPROXY=https://goproxy.cn,direct  \
 #第二阶段构建运行
 FROM alpine:latest as runner
 RUN mkdir /lib64 && ln -s /lib/libc.musl-x86_64.so.1 /lib64/ld-linux-x86-64.so.2
+#设置时区
+RUN apk add --no-cache tzdata \
+    && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
+    && echo "Asia/Shanghai" > /etc/timezone \
+    && apk del tzdata
 COPY --from=0 /GinFrame/ResumeServer/app /
 COPY --from=0 /GinFrame/ResumeServer/config_resume.yaml /
 EXPOSE 8006
 # 运行golang程序的命令
 ENTRYPOINT ./app
-
-
-
-
 
 
 #FROM alpine:latest
