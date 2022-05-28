@@ -4,7 +4,7 @@
 FROM golang:latest as build-env
 MAINTAINER ZhangZe "407102799@qq.com"
 
-ENV APP_PATH=$GOPATH/GinFrame
+ENV APP_PATH=/GinFrame
 # 在容器根目录 操作
 WORKDIR $APP_PATH
 #COPY <相对Dockerfile的文件路径 电脑位置> <docker位置 文件放置位置>
@@ -13,10 +13,13 @@ COPY proto ./proto
 COPY go.sum .
 COPY go.mod .
 
+WORKDIR $APP_PATH/ResumeServer
+
 #设置go的一些常用环境
 RUN go env -w GOPROXY=https://goproxy.cn,direct  \
     && go env -w GO111MODULE=on \
     && go mod download \
+<<<<<<< HEAD
     && cd ResumeServer \
     && go build
 RUN cd ResumeServer && ls
@@ -25,9 +28,18 @@ RUN cd ResumeServer && ls
 FROM scratch
 WORKDIR /app/
 COPY --from=0 $GOPATH/GinFrame/ResumeServer /resumeServer
+=======
+    && go build -o app
+
+#第二阶段构建运行
+FROM alpine:latest as runner
+RUN mkdir /lib64 && ln -s /lib/libc.musl-x86_64.so.1 /lib64/ld-linux-x86-64.so.2
+COPY --from=0 /GinFrame/ResumeServer/app /
+COPY --from=0 /GinFrame/ResumeServer/config_resume.yaml /
+>>>>>>> d76637c6bb6ea3587f1caaf6607209205e076b71
 EXPOSE 8006
 # 运行golang程序的命令
-ENTRYPOINT ./resumeServer
+ENTRYPOINT ./app
 
 
 
