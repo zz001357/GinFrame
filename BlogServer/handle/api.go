@@ -3,10 +3,9 @@
 * @Date: 2022/5/8 13:08
  */
 
-package api
+package handle
 
 import (
-	"GinFrame/BlogServer/common"
 	pb "GinFrame/proto"
 	"context"
 )
@@ -23,7 +22,7 @@ func (s *Server) GetBlogsCategory(ctx context.Context, in *pb.BlogsCategoryReque
 	 * @Author ZhangZe
 	 **/
 	sql := "select * from t_blogs_category where delete_time is null and is_show = '1'"
-	_, data, err := common.ReadSql(sql, common.Connection())
+	_, data, err := ReadSql(sql, Connection())
 	var d []*pb.OutData
 	for _, val := range data {
 		out := pb.OutData{Id: val["id"], VCategoryName: val["v_category_name"], CreateTime: val["create_time"], IsShow: val["is_show"]}
@@ -51,7 +50,7 @@ func (s *Server) GetArticles(ctx context.Context, in *pb.ArticlesRequest) (*pb.A
 			v_abstract -- 梗概 
 			from t_blog_articles where is_show='1' 
 			and delete_time is null and blog_category_id='` + blogCategoryId + `' order by update_time desc`
-	_, data, err := common.ReadSql(sql, common.Connection())
+	_, data, err := ReadSql(sql, Connection())
 	var d []*pb.OutArticles
 	for _, val := range data {
 		out := pb.OutArticles{Id: val["id"], BlogCategoryId: val["blog_category_id"], VArticleName: val["v_article_name"],
@@ -80,7 +79,7 @@ func (s *Server) GetArticleContent(ctx context.Context, in *pb.ArticlesContentRe
 		v_article_content -- 内容
 		from t_blog_articles where is_show='1' and delete_time is null
 		and id='` + articleId + `' order by update_time desc`
-	_, data, err := common.ReadSql(sql, common.Connection())
+	_, data, err := ReadSql(sql, Connection())
 	var d []*pb.OutArticlesContent
 	for _, val := range data {
 		out := pb.OutArticlesContent{Id: val["id"], BlogCategoryId: val["blog_category_id"], VArticleName: val["v_article_name"],

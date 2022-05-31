@@ -37,12 +37,18 @@ RUN apk add --no-cache tzdata \
     && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo "Asia/Shanghai" > /etc/timezone \
     && apk del tzdata
+<<<<<<< HEAD
 COPY --from=0 /GinFrame/ResumeServer/app /
 COPY --from=0 /GinFrame/ResumeServer/config_resume.yaml /
 >>>>>>> d76637c6bb6ea3587f1caaf6607209205e076b71
+=======
+
+COPY --from=0 /GinFrame/ResumeServer/app /ResumeServer/
+COPY --from=0 /GinFrame/ResumeServer/config_resume.yaml /ResumeServer/
+>>>>>>> 2c632663c952810add4ec3cae0fe6c229429fba3
 EXPOSE 8006
 # 运行golang程序的命令
-ENTRYPOINT ./app
+ENTRYPOINT ./ResumeServer/app
 
 
 #FROM alpine:latest
