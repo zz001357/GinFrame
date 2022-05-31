@@ -15,7 +15,7 @@ func Config() *viper.Viper {
 	//设置读取的配置文件
 	v.SetConfigName("config_resume")
 	//添加读取的配置文件路径
-	v.AddConfigPath("./")
+	v.AddConfigPath("./ResumeServer")
 	if err := v.ReadInConfig(); err != nil {
 		log.Fatalln("配置路径出错", err)
 	}

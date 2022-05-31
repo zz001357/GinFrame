@@ -31,9 +31,3 @@ func Params(c *gin.Context, key string) string {
 	param := json[key].(string)
 	return param
 }
-
-type Response struct {
-	Code    int         `json:"code"`
-	Message string      `json:"message"`
-	Data    interface{} `json:"data"`
-}

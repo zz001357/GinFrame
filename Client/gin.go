@@ -17,9 +17,14 @@ import (
 )
 
 const clientAddr = ":5000"
+
 const BlogServerAddr = "gve_blog:8005"
 const ResumeServerAddr = "gve_resume:8006"
 const PortfoliosServerAddr = "gve_portfolios:8007"
+
+//const BlogServerAddr = "192.168.2.135:8005"
+//const ResumeServerAddr = "192.168.2.135:8006"
+//const PortfoliosServerAddr = "192.168.2.135:8007"
 
 func main() {
 	/**
@@ -45,7 +50,7 @@ func main() {
 		_ = os.MkdirAll(folderPath, os.ModePerm)
 	}
 	fName := time.Now().Format("2006-01-02")
-	f, _ := os.Create("./log/" + fName + ".log")
+	f, _ := os.Create(folderPath + "/" + fName + ".log")
 	gin.DefaultWriter = io.MultiWriter(f)
 	gin.DefaultWriter = io.MultiWriter(f, os.Stdout)
 
