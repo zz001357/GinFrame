@@ -8,6 +8,7 @@ package main
 import (
 	"GinFrame/Client/api"
 	"github.com/gin-gonic/gin"
+	"github.com/shirou/gopsutil/host"
 	"google.golang.org/grpc"
 	"io"
 	"log"
@@ -18,14 +19,6 @@ import (
 
 const clientAddr = ":5000"
 
-const BlogServerAddr = "gve_blog:8005"
-const ResumeServerAddr = "gve_resume:8006"
-const PortfoliosServerAddr = "gve_portfolios:8007"
-
-//const BlogServerAddr = "192.168.2.135:8005"
-//const ResumeServerAddr = "192.168.2.135:8006"
-//const PortfoliosServerAddr = "192.168.2.135:8007"
-
 func main() {
 	/**
 	 * @Name 入口文件
@@ -35,6 +28,23 @@ func main() {
 	 * @Author ZhangZe
 	 **/
 
+	var BlogServerAddr, ResumeServerAddr, PortfoliosServerAddr string
+
+	nInfo, _ := host.Info()
+	if nInfo.OS == "windows" {
+		BlogServerAddr = "192.168.2.135:8005"
+		ResumeServerAddr = "192.168.2.135:8006"
+		PortfoliosServerAddr = "192.168.2.135:8007"
+		// DebugMode indicates gin mode is debug.
+		gin.SetMode(gin.DebugMode)
+	} else {
+		BlogServerAddr = "gve_blog:8005"
+		ResumeServerAddr = "gve_resume:8006"
+		PortfoliosServerAddr = "gve_portfolios:8007"
+		// ReleaseMode indicates gin mode is release.
+		gin.SetMode(gin.ReleaseMode)
+	}
+
 	conn1 := conn(BlogServerAddr)
 	defer conn1.Close()
 	conn2 := conn(ResumeServerAddr)
@@ -43,7 +53,8 @@ func main() {
 	defer conn2.Close()
 
 	r := gin.Default()
-	r.Use(cors()) //开启中间件 允许使用跨域请求
+	r.Use(cors())                          //开启中间件 允许使用跨域请求
+	r.StaticFS("./img", http.Dir("./img")) //图片要为静态文件
 	folderPath := "./Client/log"
 	_, err := os.Stat(folderPath)
 	if os.IsNotExist(err) {

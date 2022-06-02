@@ -7,7 +7,6 @@ package handle
 
 import (
 	"database/sql"
-	"fmt"
 	_ "github.com/go-sql-driver/mysql"
 	"log"
 	"runtime"
@@ -15,7 +14,6 @@ import (
 
 func Connection() string {
 	var sqlConfig string
-	fmt.Println()
 	goos := runtime.GOOS
 	if goos == "windows" {
 		sqlConfig = Config().GetString("Mysql.dev")

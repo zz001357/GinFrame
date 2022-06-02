@@ -3,13 +3,25 @@
 * @Date: 2022/4/11 11:38
  */
 
-package common
+package handle
 
 import (
 	"database/sql"
 	_ "github.com/go-sql-driver/mysql"
 	"log"
+	"runtime"
 )
+
+func Connection() string {
+	var sqlConfig string
+	sysType := runtime.GOOS
+	if sysType == "windows" {
+		sqlConfig = Config().GetString("Mysql.dev")
+	} else {
+		sqlConfig = Config().GetString("Mysql.pro")
+	}
+	return sqlConfig
+}
 
 func openSql(dbConnection string) *sql.DB {
 	db, sqlErr := sql.Open("mysql", dbConnection)

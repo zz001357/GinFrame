@@ -3,7 +3,7 @@
 * @Date: 2022/5/12 12:28
  */
 
-package common
+package handle
 
 import (
 	"github.com/spf13/viper"
@@ -13,7 +13,7 @@ import (
 func Config() *viper.Viper {
 	v := viper.New()
 	//设置读取的配置文件
-	v.SetConfigName("config")
+	v.SetConfigName("config_portfolios")
 	//添加读取的配置文件路径
 	v.AddConfigPath("./PortfoliosServer")
 	if err := v.ReadInConfig(); err != nil {

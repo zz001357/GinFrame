@@ -6,33 +6,23 @@
 package main
 
 import (
-	"GinFrame/PortfoliosServer/api"
-	"GinFrame/PortfoliosServer/common"
+	"GinFrame/PortfoliosServer/handle"
 	pb "GinFrame/proto"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 	"log"
 	"net"
-	"runtime"
 )
 
 func main() {
-	var Url string
-	sysType := runtime.GOOS
-	if sysType == "windows" {
-		Url = common.Config().GetString("Url.devUrl")
-	} else {
-		Url = common.Config().GetString("Url.proUrl")
-	}
-	lis, err := net.Listen("tcp", Url+":8007")
+	lis, err := net.Listen("tcp", ":8007")
 	if err != nil {
 		log.Fatalf("服务端连接出错，服务停止，错误：+%v", err)
 	}
-
 	//定义一个rpc的server
 	server := grpc.NewServer()
 	//注册服务
-	pb.RegisterPortfoliosServer(server, &api.Server{})
+	pb.RegisterPortfoliosServer(server, &handle.Server{})
 	//进行映射绑定
 	reflection.Register(server)
 
