@@ -30,7 +30,7 @@ func BlogView(r *gin.Engine, conn *grpc.ClientConn) {
 		// 调用方法
 		reply, err := client.GetBlogsCategory(context.Background(), &pb.BlogsCategoryRequest{Name: "获取博文类别", Message: "ok"})
 		if err != nil {
-			log.Println("客户端调用出错:", err)
+			log.Println("Client端出错:", err)
 			c.JSON(http.StatusOK, reply)
 		} else {
 			c.JSON(http.StatusOK, reply)
@@ -52,7 +52,7 @@ func BlogView(r *gin.Engine, conn *grpc.ClientConn) {
 		//调用方法
 		reply, err := client.GetArticles(context.Background(), &pb.ArticlesRequest{Name: "根据类别Id获取栏目信息", Message: "ok", BlogCategoryId: blogCategoryId})
 		if err != nil {
-			log.Println("客户端调用出错:", err)
+			log.Println("Client端出错:", err)
 			c.JSON(http.StatusOK, reply)
 		} else {
 			c.JSON(http.StatusOK, reply)
@@ -71,7 +71,7 @@ func BlogView(r *gin.Engine, conn *grpc.ClientConn) {
 		//调用方法
 		reply, err := client.GetArticleContent(context.Background(), &pb.ArticlesContentRequest{Name: "根据类别Id获取栏目信息", Message: "ok", ArticleId: articleId})
 		if err != nil {
-			log.Println("客户端调用出错:", err)
+			log.Println("Client端出错:", err)
 			c.JSON(http.StatusOK, reply)
 		} else {
 			c.JSON(http.StatusOK, reply)

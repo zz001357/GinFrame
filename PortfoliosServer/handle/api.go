@@ -3,10 +3,9 @@
 * @Date: 2022/5/12 12:47
  */
 
-package api
+package handle
 
 import (
-	"GinFrame/PortfoliosServer/common"
 	pb "GinFrame/proto"
 	"context"
 	"fmt"
@@ -19,7 +18,7 @@ func (s *Server) GetImgCategory(ctx context.Context, in *pb.ImgCategoryRequest) 
 	sql := "SELECT a.id AS id,a.v_category_name AS v_category_name,b.v_photo_url FROM t_photos_category a LEFT JOIN " +
 		"(select photo_category_id,v_photo_url from t_photos where is_first = 1 ) b ON a.id = b.photo_category_id  WHERE a.delete_time IS NULL " +
 		"AND a.is_show = '1' ORDER BY created_time DESC"
-	_, data, err := common.ReadSql(sql, common.Connection())
+	_, data, err := ReadSql(sql, Connection())
 	var d []*pb.OutImgCategory
 	for _, val := range data {
 		out := pb.OutImgCategory{Id: val["id"], VCategoryName: val["v_category_name"], VPhotoUrl: val["v_photo_url"]}
@@ -42,7 +41,7 @@ func (s *Server) GetImgByCategory(ctx context.Context, in *pb.ImgRequest) (*pb.I
 	 **/
 	ImgCategoryId := in.ImgCategoryId
 	sql := fmt.Sprintf("select * from t_photos where photo_category_id ='%s'", ImgCategoryId)
-	_, data, err := common.ReadSql(sql, common.Connection())
+	_, data, err := ReadSql(sql, Connection())
 	var d []*pb.OutImg
 	for _, val := range data {
 		out := pb.OutImg{Id: val["id"], PhotoCategoryId: val["photo_category_id"], VPhotoAlt: val["v_photo_alt"],
