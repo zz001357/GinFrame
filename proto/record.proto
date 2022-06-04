@@ -1,0 +1,25 @@
+syntax = "proto3";
+package record;
+option go_package="./";
+
+service Record{
+  rpc GetOtherRecord(OtherRecordRequest)returns(OtherRecordReply){}//获得其他记录信息
+}
+
+//-----------------------获得其他记录信息 start------------------
+message OtherRecordRequest{
+  string name = 1;
+  string message = 2;
+  string param = 3;
+}
+message OutRecord{
+  string id = 1;
+  string content= 2;
+  string use = 3;
+}
+message OtherRecordReply{
+  string name = 1;
+  string message = 2;
+  repeated OutRecord data = 3;
+}
+//-----------------------获得其他记录信息 end------------------
