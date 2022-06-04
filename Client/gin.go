@@ -28,19 +28,21 @@ func main() {
 	 * @Author ZhangZe
 	 **/
 
-	var BlogServerAddr, ResumeServerAddr, PortfoliosServerAddr string
+	var BlogServerAddr, ResumeServerAddr, PortfoliosServerAddr, RecordServerAddr string
 
 	nInfo, _ := host.Info()
 	if nInfo.OS == "windows" {
 		BlogServerAddr = "192.168.2.135:8005"
 		ResumeServerAddr = "192.168.2.135:8006"
 		PortfoliosServerAddr = "192.168.2.135:8007"
+		RecordServerAddr = "192.168.2.135:8008"
 		// DebugMode indicates gin mode is debug.
 		gin.SetMode(gin.DebugMode)
 	} else {
 		BlogServerAddr = "gve_blog:8005"
 		ResumeServerAddr = "gve_resume:8006"
 		PortfoliosServerAddr = "gve_portfolios:8007"
+		RecordServerAddr = "gve_record:8008"
 		// ReleaseMode indicates gin mode is release.
 		gin.SetMode(gin.ReleaseMode)
 	}
@@ -50,11 +52,12 @@ func main() {
 	conn2 := conn(ResumeServerAddr)
 	defer conn2.Close()
 	conn3 := conn(PortfoliosServerAddr)
-	defer conn2.Close()
+	defer conn3.Close()
+	conn4 := conn(RecordServerAddr)
+	defer conn4.Close()
 
 	r := gin.Default()
-	r.Use(cors())                          //开启中间件 允许使用跨域请求
-	r.StaticFS("./img", http.Dir("./img")) //图片要为静态文件
+	r.Use(cors()) //开启中间件 允许使用跨域请求
 	folderPath := "./Client/log"
 	_, err := os.Stat(folderPath)
 	if os.IsNotExist(err) {
@@ -68,6 +71,7 @@ func main() {
 	api.BlogView(r, conn1)
 	api.ResumeView(r, conn2)
 	api.PortfoliosView(r, conn3)
+	api.RecordView(r, conn4)
 
 	if err := r.Run(clientAddr); err != nil {
 		log.Fatal("程序启动失败:", err)
