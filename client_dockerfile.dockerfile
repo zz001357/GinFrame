@@ -31,7 +31,7 @@ RUN apk add --no-cache tzdata \
     && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo "Asia/Shanghai" > /etc/timezone \
     && apk del tzdata
-COPY --from=0 /GinFrame/Client/client /GinFrame/Client/
+COPY --from=0 /GinFrame/Client/client /
 COPY --from=0 /GinFrame/ggva.ren.key /GinFrame/
 COPY --from=0 /GinFrame/ggva.ren_bundle.pem /GinFrame/
 EXPOSE 5000
