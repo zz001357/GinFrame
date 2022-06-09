@@ -15,6 +15,8 @@ COPY go.mod .
 COPY ggva.ren.key .
 COPY ggva.ren_bundle.pem .
 
+WORKDIR $APP_PATH/Client
+
 #设置go的一些常用环境
 RUN go env -w GOPROXY=https://goproxy.cn,direct  \
     && go env -w GO111MODULE=on \
@@ -29,7 +31,7 @@ RUN apk add --no-cache tzdata \
     && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo "Asia/Shanghai" > /etc/timezone \
     && apk del tzdata
-COPY --from=0 /GinFrame/client /GinFrame/Client/
+COPY --from=0 /GinFrame/Client/client /GinFrame/Client/
 COPY --from=0 /GinFrame/ggva.ren.key /GinFrame/
 COPY --from=0 /GinFrame/ggva.ren_bundle.pem /GinFrame/
 EXPOSE 5000
