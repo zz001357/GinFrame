@@ -32,8 +32,8 @@ RUN apk add --no-cache tzdata \
     && echo "Asia/Shanghai" > /etc/timezone \
     && apk del tzdata
 COPY --from=0 /GinFrame/Client/client /
-COPY --from=0 /GinFrame/ggva.ren.key /GinFrame/
-COPY --from=0 /GinFrame/ggva.ren_bundle.pem /GinFrame/
+COPY --from=0 /GinFrame/ggva.ren.key /
+COPY --from=0 /GinFrame/ggva.ren_bundle.pem /
 EXPOSE 5000
 # 运行golang程序的命令
 ENTRYPOINT ./client
