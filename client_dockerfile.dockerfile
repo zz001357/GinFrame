@@ -10,8 +10,10 @@ WORKDIR $APP_PATH
 #COPY <相对Dockerfile的文件路径 电脑位置> <docker位置 文件放置位置>
 COPY Client ./Client
 COPY proto ./proto
-COPY ggva.ren.key ./
-COPY ggva.ren_bundle.pem ./
+COPY go.sum .
+COPY go.mod .
+COPY ggva.ren.key .
+COPY ggva.ren_bundle.pem .
 
 #设置go的一些常用环境
 RUN go env -w GOPROXY=https://goproxy.cn,direct  \
