@@ -29,7 +29,7 @@ RUN apk add --no-cache tzdata \
     && apk del tzdata
 COPY --from=0 /GinFrame/client /GinFrame/Client/
 COPY --from=0 /GinFrame/ggva.ren.key /GinFrame/
-COPY --from=0 /GinFrame/client/ggva.ren_bundle.pem /GinFrame/
+COPY --from=0 /GinFrame/ggva.ren_bundle.pem /GinFrame/
 EXPOSE 5000
 # 运行golang程序的命令
 ENTRYPOINT ./client
