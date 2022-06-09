@@ -9,6 +9,7 @@ import (
 	"GinFrame/Client/api"
 	"github.com/gin-gonic/gin"
 	"github.com/shirou/gopsutil/host"
+	"github.com/unrolled/secure"
 	"google.golang.org/grpc"
 	"io"
 	"log"
@@ -32,10 +33,10 @@ func main() {
 
 	nInfo, _ := host.Info()
 	if nInfo.OS == "windows" {
-		BlogServerAddr = "192.168.2.135:8005"
-		ResumeServerAddr = "192.168.2.135:8006"
-		PortfoliosServerAddr = "192.168.2.135:8007"
-		RecordServerAddr = "192.168.2.135:8008"
+		BlogServerAddr = "127.0.0.1:8005"
+		ResumeServerAddr = "127.0.0.1:8006"
+		PortfoliosServerAddr = "127.0.0.1:8007"
+		RecordServerAddr = "127.0.0.1:8008"
 		// DebugMode indicates gin mode is debug.
 		gin.SetMode(gin.DebugMode)
 	} else {
@@ -57,7 +58,9 @@ func main() {
 	defer conn4.Close()
 
 	r := gin.Default()
-	r.Use(cors()) //开启中间件 允许使用跨域请求
+	r.Use(cors())       //开启中间件 允许使用跨域请求
+	r.Use(TlsHandler()) //开启中间件 使用https
+
 	folderPath := "./Client/log"
 	_, err := os.Stat(folderPath)
 	if os.IsNotExist(err) {
@@ -73,7 +76,7 @@ func main() {
 	api.PortfoliosView(r, conn3)
 	api.RecordView(r, conn4)
 
-	if err := r.Run(clientAddr); err != nil {
+	if err := r.RunTLS(clientAddr, "ggva.ren_bundle.pem", "ggva.ren.key"); err != nil {
 		log.Fatal("程序启动失败:", err)
 	}
 }
@@ -104,6 +107,23 @@ func cors() gin.HandlerFunc {
 		if method == "OPTIONS" {
 			c.AbortWithStatus(http.StatusNoContent)
 		}
+		c.Next()
+	}
+}
+
+func TlsHandler() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		secureMiddleware := secure.New(secure.Options{
+			SSLRedirect: true,
+			SSLHost:     ":443",
+		})
+		err := secureMiddleware.Process(c.Writer, c.Request)
+
+		// If there was an error, do not continue.
+		if err != nil {
+			return
+		}
+
 		c.Next()
 	}
 }
