@@ -10,10 +10,8 @@ WORKDIR $APP_PATH
 #COPY <相对Dockerfile的文件路径 电脑位置> <docker位置 文件放置位置>
 COPY Client ./Client
 COPY proto ./proto
-COPY go.sum .
-COPY go.mod .
-
-WORKDIR $APP_PATH/Client
+COPY ggva.ren.key .
+COPY ggva.ren_bundle.pem .
 
 #设置go的一些常用环境
 RUN go env -w GOPROXY=https://goproxy.cn,direct  \
@@ -29,7 +27,9 @@ RUN apk add --no-cache tzdata \
     && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo "Asia/Shanghai" > /etc/timezone \
     && apk del tzdata
-COPY --from=0 /GinFrame/Client/client /
+COPY --from=0 /GinFrame/client /GinFrame/Client/
+COPY --from=0 /GinFrame/ggva.ren.key /GinFrame/
+COPY --from=0 /GinFrame/client/ggva.ren_bundle.pem /GinFrame/
 EXPOSE 5000
 # 运行golang程序的命令
 ENTRYPOINT ./client
