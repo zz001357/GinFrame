@@ -214,6 +214,228 @@ func (x *OtherRecordReply) GetData() []*OutRecord {
 	return nil
 }
 
+//-----------------------获得版本记录信息 start------------------
+type IterationRecordRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Name    string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Message string `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
+	Param   string `protobuf:"bytes,3,opt,name=param,proto3" json:"param,omitempty"`
+}
+
+func (x *IterationRecordRequest) Reset() {
+	*x = IterationRecordRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_record_proto_msgTypes[3]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *IterationRecordRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IterationRecordRequest) ProtoMessage() {}
+
+func (x *IterationRecordRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_record_proto_msgTypes[3]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IterationRecordRequest.ProtoReflect.Descriptor instead.
+func (*IterationRecordRequest) Descriptor() ([]byte, []int) {
+	return file_record_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *IterationRecordRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *IterationRecordRequest) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+func (x *IterationRecordRequest) GetParam() string {
+	if x != nil {
+		return x.Param
+	}
+	return ""
+}
+
+type OutIterationRecord struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Id       string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	VEdition string `protobuf:"bytes,2,opt,name=v_edition,json=vEdition,proto3" json:"v_edition,omitempty"`
+	VDate    string `protobuf:"bytes,3,opt,name=v_date,json=vDate,proto3" json:"v_date,omitempty"`
+	VContent string `protobuf:"bytes,4,opt,name=v_content,json=vContent,proto3" json:"v_content,omitempty"`
+	VType    string `protobuf:"bytes,5,opt,name=v_type,json=vType,proto3" json:"v_type,omitempty"`
+	VName    string `protobuf:"bytes,6,opt,name=v_name,json=vName,proto3" json:"v_name,omitempty"`
+	VIsUse   string `protobuf:"bytes,7,opt,name=v_is_use,json=vIsUse,proto3" json:"v_is_use,omitempty"`
+}
+
+func (x *OutIterationRecord) Reset() {
+	*x = OutIterationRecord{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_record_proto_msgTypes[4]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *OutIterationRecord) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*OutIterationRecord) ProtoMessage() {}
+
+func (x *OutIterationRecord) ProtoReflect() protoreflect.Message {
+	mi := &file_record_proto_msgTypes[4]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use OutIterationRecord.ProtoReflect.Descriptor instead.
+func (*OutIterationRecord) Descriptor() ([]byte, []int) {
+	return file_record_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *OutIterationRecord) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *OutIterationRecord) GetVEdition() string {
+	if x != nil {
+		return x.VEdition
+	}
+	return ""
+}
+
+func (x *OutIterationRecord) GetVDate() string {
+	if x != nil {
+		return x.VDate
+	}
+	return ""
+}
+
+func (x *OutIterationRecord) GetVContent() string {
+	if x != nil {
+		return x.VContent
+	}
+	return ""
+}
+
+func (x *OutIterationRecord) GetVType() string {
+	if x != nil {
+		return x.VType
+	}
+	return ""
+}
+
+func (x *OutIterationRecord) GetVName() string {
+	if x != nil {
+		return x.VName
+	}
+	return ""
+}
+
+func (x *OutIterationRecord) GetVIsUse() string {
+	if x != nil {
+		return x.VIsUse
+	}
+	return ""
+}
+
+type IterationRecordReply struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Name    string                `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Message string                `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
+	Data    []*OutIterationRecord `protobuf:"bytes,3,rep,name=data,proto3" json:"data,omitempty"`
+}
+
+func (x *IterationRecordReply) Reset() {
+	*x = IterationRecordReply{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_record_proto_msgTypes[5]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *IterationRecordReply) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IterationRecordReply) ProtoMessage() {}
+
+func (x *IterationRecordReply) ProtoReflect() protoreflect.Message {
+	mi := &file_record_proto_msgTypes[5]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IterationRecordReply.ProtoReflect.Descriptor instead.
+func (*IterationRecordReply) Descriptor() ([]byte, []int) {
+	return file_record_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *IterationRecordReply) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *IterationRecordReply) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+func (x *IterationRecordReply) GetData() []*OutIterationRecord {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
 var File_record_proto protoreflect.FileDescriptor
 
 var file_record_proto_rawDesc = []byte{
@@ -235,13 +457,43 @@ var file_record_proto_rawDesc = []byte{
 	0x28, 0x09, 0x52, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x12, 0x25, 0x0a, 0x04, 0x64,
 	0x61, 0x74, 0x61, 0x18, 0x03, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x11, 0x2e, 0x72, 0x65, 0x63, 0x6f,
 	0x72, 0x64, 0x2e, 0x4f, 0x75, 0x74, 0x52, 0x65, 0x63, 0x6f, 0x72, 0x64, 0x52, 0x04, 0x64, 0x61,
-	0x74, 0x61, 0x32, 0x52, 0x0a, 0x06, 0x52, 0x65, 0x63, 0x6f, 0x72, 0x64, 0x12, 0x48, 0x0a, 0x0e,
-	0x47, 0x65, 0x74, 0x4f, 0x74, 0x68, 0x65, 0x72, 0x52, 0x65, 0x63, 0x6f, 0x72, 0x64, 0x12, 0x1a,
-	0x2e, 0x72, 0x65, 0x63, 0x6f, 0x72, 0x64, 0x2e, 0x4f, 0x74, 0x68, 0x65, 0x72, 0x52, 0x65, 0x63,
-	0x6f, 0x72, 0x64, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x18, 0x2e, 0x72, 0x65, 0x63,
-	0x6f, 0x72, 0x64, 0x2e, 0x4f, 0x74, 0x68, 0x65, 0x72, 0x52, 0x65, 0x63, 0x6f, 0x72, 0x64, 0x52,
-	0x65, 0x70, 0x6c, 0x79, 0x22, 0x00, 0x42, 0x04, 0x5a, 0x02, 0x2e, 0x2f, 0x62, 0x06, 0x70, 0x72,
-	0x6f, 0x74, 0x6f, 0x33,
+	0x74, 0x61, 0x22, 0x5c, 0x0a, 0x16, 0x49, 0x74, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52,
+	0x65, 0x63, 0x6f, 0x72, 0x64, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x12, 0x0a, 0x04,
+	0x6e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65,
+	0x12, 0x18, 0x0a, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x12, 0x14, 0x0a, 0x05, 0x70, 0x61,
+	0x72, 0x61, 0x6d, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x70, 0x61, 0x72, 0x61, 0x6d,
+	0x22, 0xbd, 0x01, 0x0a, 0x12, 0x4f, 0x75, 0x74, 0x49, 0x74, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f,
+	0x6e, 0x52, 0x65, 0x63, 0x6f, 0x72, 0x64, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x12, 0x1b, 0x0a, 0x09, 0x76, 0x5f, 0x65, 0x64, 0x69,
+	0x74, 0x69, 0x6f, 0x6e, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x76, 0x45, 0x64, 0x69,
+	0x74, 0x69, 0x6f, 0x6e, 0x12, 0x15, 0x0a, 0x06, 0x76, 0x5f, 0x64, 0x61, 0x74, 0x65, 0x18, 0x03,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x76, 0x44, 0x61, 0x74, 0x65, 0x12, 0x1b, 0x0a, 0x09, 0x76,
+	0x5f, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08,
+	0x76, 0x43, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x12, 0x15, 0x0a, 0x06, 0x76, 0x5f, 0x74, 0x79,
+	0x70, 0x65, 0x18, 0x05, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x76, 0x54, 0x79, 0x70, 0x65, 0x12,
+	0x15, 0x0a, 0x06, 0x76, 0x5f, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x06, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x05, 0x76, 0x4e, 0x61, 0x6d, 0x65, 0x12, 0x18, 0x0a, 0x08, 0x76, 0x5f, 0x69, 0x73, 0x5f, 0x75,
+	0x73, 0x65, 0x18, 0x07, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x76, 0x49, 0x73, 0x55, 0x73, 0x65,
+	0x22, 0x74, 0x0a, 0x14, 0x49, 0x74, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x63,
+	0x6f, 0x72, 0x64, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x18, 0x0a, 0x07,
+	0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x6d,
+	0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x12, 0x2e, 0x0a, 0x04, 0x64, 0x61, 0x74, 0x61, 0x18, 0x03,
+	0x20, 0x03, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x72, 0x65, 0x63, 0x6f, 0x72, 0x64, 0x2e, 0x4f, 0x75,
+	0x74, 0x49, 0x74, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x63, 0x6f, 0x72, 0x64,
+	0x52, 0x04, 0x64, 0x61, 0x74, 0x61, 0x32, 0xa8, 0x01, 0x0a, 0x06, 0x52, 0x65, 0x63, 0x6f, 0x72,
+	0x64, 0x12, 0x48, 0x0a, 0x0e, 0x47, 0x65, 0x74, 0x4f, 0x74, 0x68, 0x65, 0x72, 0x52, 0x65, 0x63,
+	0x6f, 0x72, 0x64, 0x12, 0x1a, 0x2e, 0x72, 0x65, 0x63, 0x6f, 0x72, 0x64, 0x2e, 0x4f, 0x74, 0x68,
+	0x65, 0x72, 0x52, 0x65, 0x63, 0x6f, 0x72, 0x64, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a,
+	0x18, 0x2e, 0x72, 0x65, 0x63, 0x6f, 0x72, 0x64, 0x2e, 0x4f, 0x74, 0x68, 0x65, 0x72, 0x52, 0x65,
+	0x63, 0x6f, 0x72, 0x64, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x00, 0x12, 0x54, 0x0a, 0x12, 0x47,
+	0x65, 0x74, 0x49, 0x74, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x63, 0x6f, 0x72,
+	0x64, 0x12, 0x1e, 0x2e, 0x72, 0x65, 0x63, 0x6f, 0x72, 0x64, 0x2e, 0x49, 0x74, 0x65, 0x72, 0x61,
+	0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x63, 0x6f, 0x72, 0x64, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
+	0x74, 0x1a, 0x1c, 0x2e, 0x72, 0x65, 0x63, 0x6f, 0x72, 0x64, 0x2e, 0x49, 0x74, 0x65, 0x72, 0x61,
+	0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x63, 0x6f, 0x72, 0x64, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22,
+	0x00, 0x42, 0x04, 0x5a, 0x02, 0x2e, 0x2f, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -256,21 +508,27 @@ func file_record_proto_rawDescGZIP() []byte {
 	return file_record_proto_rawDescData
 }
 
-var file_record_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_record_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_record_proto_goTypes = []interface{}{
-	(*OtherRecordRequest)(nil), // 0: record.OtherRecordRequest
-	(*OutRecord)(nil),          // 1: record.OutRecord
-	(*OtherRecordReply)(nil),   // 2: record.OtherRecordReply
+	(*OtherRecordRequest)(nil),     // 0: record.OtherRecordRequest
+	(*OutRecord)(nil),              // 1: record.OutRecord
+	(*OtherRecordReply)(nil),       // 2: record.OtherRecordReply
+	(*IterationRecordRequest)(nil), // 3: record.IterationRecordRequest
+	(*OutIterationRecord)(nil),     // 4: record.OutIterationRecord
+	(*IterationRecordReply)(nil),   // 5: record.IterationRecordReply
 }
 var file_record_proto_depIdxs = []int32{
 	1, // 0: record.OtherRecordReply.data:type_name -> record.OutRecord
-	0, // 1: record.Record.GetOtherRecord:input_type -> record.OtherRecordRequest
-	2, // 2: record.Record.GetOtherRecord:output_type -> record.OtherRecordReply
-	2, // [2:3] is the sub-list for method output_type
-	1, // [1:2] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	4, // 1: record.IterationRecordReply.data:type_name -> record.OutIterationRecord
+	0, // 2: record.Record.GetOtherRecord:input_type -> record.OtherRecordRequest
+	3, // 3: record.Record.GetIterationRecord:input_type -> record.IterationRecordRequest
+	2, // 4: record.Record.GetOtherRecord:output_type -> record.OtherRecordReply
+	5, // 5: record.Record.GetIterationRecord:output_type -> record.IterationRecordReply
+	4, // [4:6] is the sub-list for method output_type
+	2, // [2:4] is the sub-list for method input_type
+	2, // [2:2] is the sub-list for extension type_name
+	2, // [2:2] is the sub-list for extension extendee
+	0, // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_record_proto_init() }
@@ -315,6 +573,42 @@ func file_record_proto_init() {
 				return nil
 			}
 		}
+		file_record_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*IterationRecordRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_record_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*OutIterationRecord); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_record_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*IterationRecordReply); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -322,7 +616,7 @@ func file_record_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_record_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   3,
+			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
@@ -349,6 +643,7 @@ const _ = grpc.SupportPackageIsVersion6
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type RecordClient interface {
 	GetOtherRecord(ctx context.Context, in *OtherRecordRequest, opts ...grpc.CallOption) (*OtherRecordReply, error)
+	GetIterationRecord(ctx context.Context, in *IterationRecordRequest, opts ...grpc.CallOption) (*IterationRecordReply, error)
 }
 
 type recordClient struct {
@@ -368,9 +663,19 @@ func (c *recordClient) GetOtherRecord(ctx context.Context, in *OtherRecordReques
 	return out, nil
 }
 
+func (c *recordClient) GetIterationRecord(ctx context.Context, in *IterationRecordRequest, opts ...grpc.CallOption) (*IterationRecordReply, error) {
+	out := new(IterationRecordReply)
+	err := c.cc.Invoke(ctx, "/record.Record/GetIterationRecord", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // RecordServer is the server API for Record service.
 type RecordServer interface {
 	GetOtherRecord(context.Context, *OtherRecordRequest) (*OtherRecordReply, error)
+	GetIterationRecord(context.Context, *IterationRecordRequest) (*IterationRecordReply, error)
 }
 
 // UnimplementedRecordServer can be embedded to have forward compatible implementations.
@@ -379,6 +684,9 @@ type UnimplementedRecordServer struct {
 
 func (*UnimplementedRecordServer) GetOtherRecord(context.Context, *OtherRecordRequest) (*OtherRecordReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOtherRecord not implemented")
+}
+func (*UnimplementedRecordServer) GetIterationRecord(context.Context, *IterationRecordRequest) (*IterationRecordReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetIterationRecord not implemented")
 }
 
 func RegisterRecordServer(s *grpc.Server, srv RecordServer) {
@@ -403,6 +711,24 @@ func _Record_GetOtherRecord_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Record_GetIterationRecord_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IterationRecordRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RecordServer).GetIterationRecord(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/record.Record/GetIterationRecord",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RecordServer).GetIterationRecord(ctx, req.(*IterationRecordRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _Record_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "record.Record",
 	HandlerType: (*RecordServer)(nil),
@@ -410,6 +736,10 @@ var _Record_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetOtherRecord",
 			Handler:    _Record_GetOtherRecord_Handler,
+		},
+		{
+			MethodName: "GetIterationRecord",
+			Handler:    _Record_GetIterationRecord_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

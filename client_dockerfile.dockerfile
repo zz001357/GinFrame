@@ -12,6 +12,8 @@ COPY Client ./Client
 COPY proto ./proto
 COPY go.sum .
 COPY go.mod .
+COPY ggva.ren.key .
+COPY ggva.ren_bundle.pem .
 
 WORKDIR $APP_PATH/Client
 
@@ -30,6 +32,8 @@ RUN apk add --no-cache tzdata \
     && echo "Asia/Shanghai" > /etc/timezone \
     && apk del tzdata
 COPY --from=0 /GinFrame/Client/client /
+COPY --from=0 /GinFrame/ggva.ren.key /
+COPY --from=0 /GinFrame/ggva.ren_bundle.pem /
 EXPOSE 5000
 # 运行golang程序的命令
 ENTRYPOINT ./client
