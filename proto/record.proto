@@ -1,9 +1,10 @@
 syntax = "proto3";
 package record;
-option go_package="./";
+option go_package = "./";
 
 service Record{
   rpc GetOtherRecord(OtherRecordRequest)returns(OtherRecordReply){}//获得其他记录信息
+  rpc GetIterationRecord(IterationRecordRequest)returns(IterationRecordReply){}//获得其他记录信息
 }
 
 //-----------------------获得其他记录信息 start------------------
@@ -14,7 +15,7 @@ message OtherRecordRequest{
 }
 message OutRecord{
   string id = 1;
-  string content= 2;
+  string content = 2;
   string use = 3;
 }
 message OtherRecordReply{
@@ -23,3 +24,25 @@ message OtherRecordReply{
   repeated OutRecord data = 3;
 }
 //-----------------------获得其他记录信息 end------------------
+
+//-----------------------获得版本记录信息 start------------------
+message IterationRecordRequest{
+  string name = 1;
+  string message = 2;
+  string param = 3;
+}
+message OutIterationRecord{
+  string id = 1;
+  string v_edition = 2;
+  string v_date = 3;
+  string v_content = 4;
+  string v_type = 5;
+  string v_name = 6;
+  string v_is_use = 7;
+}
+message IterationRecordReply{
+  string name = 1;
+  string message = 2;
+  repeated OutIterationRecord data = 3;
+}
+//-----------------------获得版本记录信息 end------------------

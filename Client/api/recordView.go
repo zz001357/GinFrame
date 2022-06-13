@@ -18,6 +18,7 @@ import (
 func RecordView(r *gin.Engine, conn *grpc.ClientConn) {
 	//创建gRPC客户端
 	client := pb.NewRecordClient(conn)
+
 	r.POST("/handle/record/getOtherRecord", func(c *gin.Context) {
 		/**
 		 * @Name 获取记录
@@ -29,6 +30,25 @@ func RecordView(r *gin.Engine, conn *grpc.ClientConn) {
 		// 调用方法
 		param := common.Params(c, "record_style")
 		reply, err := client.GetOtherRecord(context.Background(), &pb.OtherRecordRequest{Name: "获取记录", Message: "ok", Param: param})
+		if err != nil {
+			log.Println("Client端出错:", err)
+			c.JSON(http.StatusOK, reply)
+		} else {
+			c.JSON(http.StatusOK, reply)
+		}
+	})
+
+	r.POST("/handle/record/getIterationRecord", func(c *gin.Context) {
+		/**
+		 * @Name 获取迭代记录
+		 * @Param iteration_type 版本类型 (web、min-app)
+		 * @Return
+		 * @Date 2022/6/12 14:26
+		 * @Author ZhangZe
+		 **/
+		// 调用方法
+		param := common.Params(c, "iteration_type")
+		reply, err := client.GetIterationRecord(context.Background(), &pb.IterationRecordRequest{Name: "获取记录", Message: "ok", Param: param})
 		if err != nil {
 			log.Println("Client端出错:", err)
 			c.JSON(http.StatusOK, reply)

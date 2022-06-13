@@ -29,7 +29,10 @@ func main() {
 	 * @Author ZhangZe
 	 **/
 
-	var BlogServerAddr, ResumeServerAddr, PortfoliosServerAddr, RecordServerAddr string
+	var BlogServerAddr string
+	var ResumeServerAddr string
+	var PortfoliosServerAddr string
+	var RecordServerAddr string
 
 	nInfo, _ := host.Info()
 	if nInfo.OS == "windows" {
@@ -76,9 +79,16 @@ func main() {
 	api.PortfoliosView(r, conn3)
 	api.RecordView(r, conn4)
 
-	if err := r.RunTLS(clientAddr, "ggva.ren_bundle.pem", "ggva.ren.key"); err != nil {
-		log.Fatal("程序启动失败:", err)
+	if nInfo.OS == "windows" {
+		if err := r.Run(clientAddr); err != nil {
+			log.Fatal("程序启动失败:", err)
+		}
+	} else {
+		if err := r.RunTLS(clientAddr, "ggva.ren_bundle.pem", "ggva.ren.key"); err != nil {
+			log.Fatal("程序启动失败:", err)
+		}
 	}
+
 }
 
 func conn(ip string) *grpc.ClientConn {
