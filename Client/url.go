@@ -12,10 +12,10 @@ import (
 	"google.golang.org/grpc"
 )
 
-var BlogServerAddr string
-var ResumeServerAddr string
-var PortfoliosServerAddr string
-var RecordServerAddr string
+var BlogServerAddr = "127.0.0.1:8005"
+var ResumeServerAddr = "127.0.0.1:8006"
+var PortfoliosServerAddr = "127.0.0.1:8007"
+var RecordServerAddr = "127.0.0.1:8008"
 
 func conn(ip string) *grpc.ClientConn {
 	//创建一个grpc连接
@@ -29,12 +29,7 @@ func conn(ip string) *grpc.ClientConn {
 
 func Server(r *gin.Engine) (*grpc.ClientConn, *grpc.ClientConn, *grpc.ClientConn, *grpc.ClientConn) {
 	nInfo, _ := host.Info()
-	if nInfo.OS == "windows" {
-		BlogServerAddr = "127.0.0.1:8005"
-		ResumeServerAddr = "127.0.0.1:8006"
-		PortfoliosServerAddr = "127.0.0.1:8007"
-		RecordServerAddr = "127.0.0.1:8008"
-	} else {
+	if nInfo.OS != "windows" {
 		BlogServerAddr = "gve_blog:8005"
 		ResumeServerAddr = "gve_resume:8006"
 		PortfoliosServerAddr = "gve_portfolios:8007"

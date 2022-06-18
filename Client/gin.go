@@ -39,27 +39,22 @@ func main() {
 	gin.DefaultWriter = io.MultiWriter(f)
 	gin.DefaultWriter = io.MultiWriter(f, os.Stdout)
 
+	conn1, conn2, conn3, conn4 := Server(r)
 	nInfo, _ := host.Info()
 	if nInfo.OS == "windows" {
-		conn1, conn2, conn3, conn4 := Server(r)
 		gin.SetMode(gin.DebugMode)
 		if err := r.Run(clientAddr); err != nil {
 			log.Fatal("程序启动失败:", err)
 		}
-		_ = conn1.Close()
-		_ = conn2.Close()
-		_ = conn3.Close()
-		_ = conn4.Close()
 	} else {
-		conn1, conn2, conn3, conn4 := Server(r)
 		gin.SetMode(gin.ReleaseMode)
 		if err := r.RunTLS(clientAddr, "ggva.ren_bundle.pem", "ggva.ren.key"); err != nil {
 			log.Fatal("程序启动失败:", err)
 		}
-		_ = conn1.Close()
-		_ = conn2.Close()
-		_ = conn3.Close()
-		_ = conn4.Close()
-	}
 
+	}
+	_ = conn1.Close()
+	_ = conn2.Close()
+	_ = conn3.Close()
+	_ = conn4.Close()
 }
