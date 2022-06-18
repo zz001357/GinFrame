@@ -24,6 +24,133 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+//-----------------------记录请求 start------------------
+type RequestParam struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	ServerName string `protobuf:"bytes,1,opt,name=server_name,json=serverName,proto3" json:"server_name,omitempty"`
+	Ip         string `protobuf:"bytes,2,opt,name=ip,proto3" json:"ip,omitempty"`
+	IpAddr     string `protobuf:"bytes,3,opt,name=ip_addr,json=ipAddr,proto3" json:"ip_addr,omitempty"`
+	Result     string `protobuf:"bytes,4,opt,name=result,proto3" json:"result,omitempty"`
+}
+
+func (x *RequestParam) Reset() {
+	*x = RequestParam{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_resume_proto_msgTypes[0]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *RequestParam) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RequestParam) ProtoMessage() {}
+
+func (x *RequestParam) ProtoReflect() protoreflect.Message {
+	mi := &file_resume_proto_msgTypes[0]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RequestParam.ProtoReflect.Descriptor instead.
+func (*RequestParam) Descriptor() ([]byte, []int) {
+	return file_resume_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *RequestParam) GetServerName() string {
+	if x != nil {
+		return x.ServerName
+	}
+	return ""
+}
+
+func (x *RequestParam) GetIp() string {
+	if x != nil {
+		return x.Ip
+	}
+	return ""
+}
+
+func (x *RequestParam) GetIpAddr() string {
+	if x != nil {
+		return x.IpAddr
+	}
+	return ""
+}
+
+func (x *RequestParam) GetResult() string {
+	if x != nil {
+		return x.Result
+	}
+	return ""
+}
+
+type RequestReply struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Name    string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Message string `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
+}
+
+func (x *RequestReply) Reset() {
+	*x = RequestReply{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_resume_proto_msgTypes[1]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *RequestReply) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RequestReply) ProtoMessage() {}
+
+func (x *RequestReply) ProtoReflect() protoreflect.Message {
+	mi := &file_resume_proto_msgTypes[1]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RequestReply.ProtoReflect.Descriptor instead.
+func (*RequestReply) Descriptor() ([]byte, []int) {
+	return file_resume_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *RequestReply) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *RequestReply) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
 //-----------------------获取基本信息 start------------------
 type BaseInfoRequest struct {
 	state         protoimpl.MessageState
@@ -37,7 +164,7 @@ type BaseInfoRequest struct {
 func (x *BaseInfoRequest) Reset() {
 	*x = BaseInfoRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_resume_proto_msgTypes[0]
+		mi := &file_resume_proto_msgTypes[2]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -50,7 +177,7 @@ func (x *BaseInfoRequest) String() string {
 func (*BaseInfoRequest) ProtoMessage() {}
 
 func (x *BaseInfoRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_resume_proto_msgTypes[0]
+	mi := &file_resume_proto_msgTypes[2]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -63,7 +190,7 @@ func (x *BaseInfoRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BaseInfoRequest.ProtoReflect.Descriptor instead.
 func (*BaseInfoRequest) Descriptor() ([]byte, []int) {
-	return file_resume_proto_rawDescGZIP(), []int{0}
+	return file_resume_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *BaseInfoRequest) GetName() string {
@@ -97,7 +224,7 @@ type OutBaseInfo struct {
 func (x *OutBaseInfo) Reset() {
 	*x = OutBaseInfo{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_resume_proto_msgTypes[1]
+		mi := &file_resume_proto_msgTypes[3]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -110,7 +237,7 @@ func (x *OutBaseInfo) String() string {
 func (*OutBaseInfo) ProtoMessage() {}
 
 func (x *OutBaseInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_resume_proto_msgTypes[1]
+	mi := &file_resume_proto_msgTypes[3]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -123,7 +250,7 @@ func (x *OutBaseInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OutBaseInfo.ProtoReflect.Descriptor instead.
 func (*OutBaseInfo) Descriptor() ([]byte, []int) {
-	return file_resume_proto_rawDescGZIP(), []int{1}
+	return file_resume_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *OutBaseInfo) GetId() string {
@@ -188,7 +315,7 @@ type BaseInfoReply struct {
 func (x *BaseInfoReply) Reset() {
 	*x = BaseInfoReply{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_resume_proto_msgTypes[2]
+		mi := &file_resume_proto_msgTypes[4]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -201,7 +328,7 @@ func (x *BaseInfoReply) String() string {
 func (*BaseInfoReply) ProtoMessage() {}
 
 func (x *BaseInfoReply) ProtoReflect() protoreflect.Message {
-	mi := &file_resume_proto_msgTypes[2]
+	mi := &file_resume_proto_msgTypes[4]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -214,7 +341,7 @@ func (x *BaseInfoReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BaseInfoReply.ProtoReflect.Descriptor instead.
 func (*BaseInfoReply) Descriptor() ([]byte, []int) {
-	return file_resume_proto_rawDescGZIP(), []int{2}
+	return file_resume_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *BaseInfoReply) GetName() string {
@@ -252,7 +379,7 @@ type ResumeInfoRequest struct {
 func (x *ResumeInfoRequest) Reset() {
 	*x = ResumeInfoRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_resume_proto_msgTypes[3]
+		mi := &file_resume_proto_msgTypes[5]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -265,7 +392,7 @@ func (x *ResumeInfoRequest) String() string {
 func (*ResumeInfoRequest) ProtoMessage() {}
 
 func (x *ResumeInfoRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_resume_proto_msgTypes[3]
+	mi := &file_resume_proto_msgTypes[5]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -278,7 +405,7 @@ func (x *ResumeInfoRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ResumeInfoRequest.ProtoReflect.Descriptor instead.
 func (*ResumeInfoRequest) Descriptor() ([]byte, []int) {
-	return file_resume_proto_rawDescGZIP(), []int{3}
+	return file_resume_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *ResumeInfoRequest) GetName() string {
@@ -318,7 +445,7 @@ type OutResumeInfo struct {
 func (x *OutResumeInfo) Reset() {
 	*x = OutResumeInfo{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_resume_proto_msgTypes[4]
+		mi := &file_resume_proto_msgTypes[6]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -331,7 +458,7 @@ func (x *OutResumeInfo) String() string {
 func (*OutResumeInfo) ProtoMessage() {}
 
 func (x *OutResumeInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_resume_proto_msgTypes[4]
+	mi := &file_resume_proto_msgTypes[6]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -344,7 +471,7 @@ func (x *OutResumeInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OutResumeInfo.ProtoReflect.Descriptor instead.
 func (*OutResumeInfo) Descriptor() ([]byte, []int) {
-	return file_resume_proto_rawDescGZIP(), []int{4}
+	return file_resume_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *OutResumeInfo) GetId() string {
@@ -402,7 +529,7 @@ type ResumeInfoReply struct {
 func (x *ResumeInfoReply) Reset() {
 	*x = ResumeInfoReply{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_resume_proto_msgTypes[5]
+		mi := &file_resume_proto_msgTypes[7]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -415,7 +542,7 @@ func (x *ResumeInfoReply) String() string {
 func (*ResumeInfoReply) ProtoMessage() {}
 
 func (x *ResumeInfoReply) ProtoReflect() protoreflect.Message {
-	mi := &file_resume_proto_msgTypes[5]
+	mi := &file_resume_proto_msgTypes[7]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -428,7 +555,7 @@ func (x *ResumeInfoReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ResumeInfoReply.ProtoReflect.Descriptor instead.
 func (*ResumeInfoReply) Descriptor() ([]byte, []int) {
-	return file_resume_proto_rawDescGZIP(), []int{5}
+	return file_resume_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *ResumeInfoReply) GetName() string {
@@ -456,7 +583,18 @@ var File_resume_proto protoreflect.FileDescriptor
 
 var file_resume_proto_rawDesc = []byte{
 	0x0a, 0x0c, 0x72, 0x65, 0x73, 0x75, 0x6d, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x06,
-	0x72, 0x65, 0x73, 0x75, 0x6d, 0x65, 0x22, 0x3f, 0x0a, 0x0f, 0x42, 0x61, 0x73, 0x65, 0x49, 0x6e,
+	0x72, 0x65, 0x73, 0x75, 0x6d, 0x65, 0x22, 0x70, 0x0a, 0x0c, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
+	0x74, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x12, 0x1f, 0x0a, 0x0b, 0x73, 0x65, 0x72, 0x76, 0x65, 0x72,
+	0x5f, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a, 0x73, 0x65, 0x72,
+	0x76, 0x65, 0x72, 0x4e, 0x61, 0x6d, 0x65, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x70, 0x18, 0x02, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x70, 0x12, 0x17, 0x0a, 0x07, 0x69, 0x70, 0x5f, 0x61, 0x64,
+	0x64, 0x72, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x69, 0x70, 0x41, 0x64, 0x64, 0x72,
+	0x12, 0x16, 0x0a, 0x06, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09,
+	0x52, 0x06, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x22, 0x3c, 0x0a, 0x0c, 0x52, 0x65, 0x71, 0x75,
+	0x65, 0x73, 0x74, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x18, 0x0a, 0x07,
+	0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x6d,
+	0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x22, 0x3f, 0x0a, 0x0f, 0x42, 0x61, 0x73, 0x65, 0x49, 0x6e,
 	0x66, 0x6f, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d,
 	0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x18, 0x0a,
 	0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07,
@@ -503,7 +641,11 @@ var file_resume_proto_rawDesc = []byte{
 	0x52, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x12, 0x29, 0x0a, 0x04, 0x64, 0x61, 0x74,
 	0x61, 0x18, 0x03, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x15, 0x2e, 0x72, 0x65, 0x73, 0x75, 0x6d, 0x65,
 	0x2e, 0x4f, 0x75, 0x74, 0x52, 0x65, 0x73, 0x75, 0x6d, 0x65, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x04,
-	0x64, 0x61, 0x74, 0x61, 0x32, 0x90, 0x01, 0x0a, 0x06, 0x52, 0x65, 0x73, 0x75, 0x6d, 0x65, 0x12,
+	0x64, 0x61, 0x74, 0x61, 0x32, 0xd0, 0x01, 0x0a, 0x06, 0x52, 0x65, 0x73, 0x75, 0x6d, 0x65, 0x12,
+	0x3e, 0x0a, 0x0e, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x4c, 0x6f, 0x67, 0x67, 0x69, 0x6e,
+	0x67, 0x12, 0x14, 0x2e, 0x72, 0x65, 0x73, 0x75, 0x6d, 0x65, 0x2e, 0x52, 0x65, 0x71, 0x75, 0x65,
+	0x73, 0x74, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x1a, 0x14, 0x2e, 0x72, 0x65, 0x73, 0x75, 0x6d, 0x65,
+	0x2e, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x00, 0x12,
 	0x3f, 0x0a, 0x0b, 0x47, 0x65, 0x74, 0x42, 0x61, 0x73, 0x65, 0x49, 0x6e, 0x66, 0x6f, 0x12, 0x17,
 	0x2e, 0x72, 0x65, 0x73, 0x75, 0x6d, 0x65, 0x2e, 0x42, 0x61, 0x73, 0x65, 0x49, 0x6e, 0x66, 0x6f,
 	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x15, 0x2e, 0x72, 0x65, 0x73, 0x75, 0x6d, 0x65,
@@ -528,24 +670,28 @@ func file_resume_proto_rawDescGZIP() []byte {
 	return file_resume_proto_rawDescData
 }
 
-var file_resume_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
+var file_resume_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
 var file_resume_proto_goTypes = []interface{}{
-	(*BaseInfoRequest)(nil),   // 0: resume.BaseInfoRequest
-	(*OutBaseInfo)(nil),       // 1: resume.OutBaseInfo
-	(*BaseInfoReply)(nil),     // 2: resume.BaseInfoReply
-	(*ResumeInfoRequest)(nil), // 3: resume.ResumeInfoRequest
-	(*OutResumeInfo)(nil),     // 4: resume.OutResumeInfo
-	(*ResumeInfoReply)(nil),   // 5: resume.ResumeInfoReply
+	(*RequestParam)(nil),      // 0: resume.RequestParam
+	(*RequestReply)(nil),      // 1: resume.RequestReply
+	(*BaseInfoRequest)(nil),   // 2: resume.BaseInfoRequest
+	(*OutBaseInfo)(nil),       // 3: resume.OutBaseInfo
+	(*BaseInfoReply)(nil),     // 4: resume.BaseInfoReply
+	(*ResumeInfoRequest)(nil), // 5: resume.ResumeInfoRequest
+	(*OutResumeInfo)(nil),     // 6: resume.OutResumeInfo
+	(*ResumeInfoReply)(nil),   // 7: resume.ResumeInfoReply
 }
 var file_resume_proto_depIdxs = []int32{
-	1, // 0: resume.BaseInfoReply.data:type_name -> resume.OutBaseInfo
-	4, // 1: resume.ResumeInfoReply.data:type_name -> resume.OutResumeInfo
-	0, // 2: resume.Resume.GetBaseInfo:input_type -> resume.BaseInfoRequest
-	3, // 3: resume.Resume.GetResumeInfo:input_type -> resume.ResumeInfoRequest
-	2, // 4: resume.Resume.GetBaseInfo:output_type -> resume.BaseInfoReply
-	5, // 5: resume.Resume.GetResumeInfo:output_type -> resume.ResumeInfoReply
-	4, // [4:6] is the sub-list for method output_type
-	2, // [2:4] is the sub-list for method input_type
+	3, // 0: resume.BaseInfoReply.data:type_name -> resume.OutBaseInfo
+	6, // 1: resume.ResumeInfoReply.data:type_name -> resume.OutResumeInfo
+	0, // 2: resume.Resume.RequestLogging:input_type -> resume.RequestParam
+	2, // 3: resume.Resume.GetBaseInfo:input_type -> resume.BaseInfoRequest
+	5, // 4: resume.Resume.GetResumeInfo:input_type -> resume.ResumeInfoRequest
+	1, // 5: resume.Resume.RequestLogging:output_type -> resume.RequestReply
+	4, // 6: resume.Resume.GetBaseInfo:output_type -> resume.BaseInfoReply
+	7, // 7: resume.Resume.GetResumeInfo:output_type -> resume.ResumeInfoReply
+	5, // [5:8] is the sub-list for method output_type
+	2, // [2:5] is the sub-list for method input_type
 	2, // [2:2] is the sub-list for extension type_name
 	2, // [2:2] is the sub-list for extension extendee
 	0, // [0:2] is the sub-list for field type_name
@@ -558,7 +704,7 @@ func file_resume_proto_init() {
 	}
 	if !protoimpl.UnsafeEnabled {
 		file_resume_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*BaseInfoRequest); i {
+			switch v := v.(*RequestParam); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -570,7 +716,7 @@ func file_resume_proto_init() {
 			}
 		}
 		file_resume_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*OutBaseInfo); i {
+			switch v := v.(*RequestReply); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -582,7 +728,7 @@ func file_resume_proto_init() {
 			}
 		}
 		file_resume_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*BaseInfoReply); i {
+			switch v := v.(*BaseInfoRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -594,7 +740,7 @@ func file_resume_proto_init() {
 			}
 		}
 		file_resume_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ResumeInfoRequest); i {
+			switch v := v.(*OutBaseInfo); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -606,7 +752,7 @@ func file_resume_proto_init() {
 			}
 		}
 		file_resume_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*OutResumeInfo); i {
+			switch v := v.(*BaseInfoReply); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -618,6 +764,30 @@ func file_resume_proto_init() {
 			}
 		}
 		file_resume_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ResumeInfoRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_resume_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*OutResumeInfo); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_resume_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ResumeInfoReply); i {
 			case 0:
 				return &v.state
@@ -636,7 +806,7 @@ func file_resume_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_resume_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   6,
+			NumMessages:   8,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
@@ -662,6 +832,7 @@ const _ = grpc.SupportPackageIsVersion6
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type ResumeClient interface {
+	RequestLogging(ctx context.Context, in *RequestParam, opts ...grpc.CallOption) (*RequestReply, error)
 	GetBaseInfo(ctx context.Context, in *BaseInfoRequest, opts ...grpc.CallOption) (*BaseInfoReply, error)
 	GetResumeInfo(ctx context.Context, in *ResumeInfoRequest, opts ...grpc.CallOption) (*ResumeInfoReply, error)
 }
@@ -672,6 +843,15 @@ type resumeClient struct {
 
 func NewResumeClient(cc grpc.ClientConnInterface) ResumeClient {
 	return &resumeClient{cc}
+}
+
+func (c *resumeClient) RequestLogging(ctx context.Context, in *RequestParam, opts ...grpc.CallOption) (*RequestReply, error) {
+	out := new(RequestReply)
+	err := c.cc.Invoke(ctx, "/resume.Resume/RequestLogging", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *resumeClient) GetBaseInfo(ctx context.Context, in *BaseInfoRequest, opts ...grpc.CallOption) (*BaseInfoReply, error) {
@@ -694,6 +874,7 @@ func (c *resumeClient) GetResumeInfo(ctx context.Context, in *ResumeInfoRequest,
 
 // ResumeServer is the server API for Resume service.
 type ResumeServer interface {
+	RequestLogging(context.Context, *RequestParam) (*RequestReply, error)
 	GetBaseInfo(context.Context, *BaseInfoRequest) (*BaseInfoReply, error)
 	GetResumeInfo(context.Context, *ResumeInfoRequest) (*ResumeInfoReply, error)
 }
@@ -702,6 +883,9 @@ type ResumeServer interface {
 type UnimplementedResumeServer struct {
 }
 
+func (*UnimplementedResumeServer) RequestLogging(context.Context, *RequestParam) (*RequestReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RequestLogging not implemented")
+}
 func (*UnimplementedResumeServer) GetBaseInfo(context.Context, *BaseInfoRequest) (*BaseInfoReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetBaseInfo not implemented")
 }
@@ -711,6 +895,24 @@ func (*UnimplementedResumeServer) GetResumeInfo(context.Context, *ResumeInfoRequ
 
 func RegisterResumeServer(s *grpc.Server, srv ResumeServer) {
 	s.RegisterService(&_Resume_serviceDesc, srv)
+}
+
+func _Resume_RequestLogging_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RequestParam)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ResumeServer).RequestLogging(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/resume.Resume/RequestLogging",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ResumeServer).RequestLogging(ctx, req.(*RequestParam))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _Resume_GetBaseInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -753,6 +955,10 @@ var _Resume_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "resume.Resume",
 	HandlerType: (*ResumeServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "RequestLogging",
+			Handler:    _Resume_RequestLogging_Handler,
+		},
 		{
 			MethodName: "GetBaseInfo",
 			Handler:    _Resume_GetBaseInfo_Handler,
