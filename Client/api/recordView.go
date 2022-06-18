@@ -19,6 +19,24 @@ func RecordView(r *gin.Engine, conn *grpc.ClientConn) {
 	//创建gRPC客户端
 	client := pb.NewRecordClient(conn)
 
+	r.POST("/handle/record/server", func(c *gin.Context) {
+		/**
+		 * @Name 记录服务请求
+		 * @Param
+		 * @Return
+		 * @Date 2022/6/18 15:05
+		 * @Author ZhangZe
+		 **/
+		ip, addr := common.IpUntil()                                                                                           //记录ip 和 地址
+		reply, err := client.RecordServer(context.Background(), &pb.RecordRequest{ServerName: "record", Ip: ip, IpAddr: addr}) //记录请求
+		if err != nil {
+			log.Println("Client端出错:", err)
+			c.JSON(http.StatusOK, reply)
+		} else {
+			c.JSON(http.StatusOK, reply)
+		}
+	})
+
 	r.POST("/handle/record/getOtherRecord", func(c *gin.Context) {
 		/**
 		 * @Name 获取记录

@@ -3,9 +3,23 @@ package portfolios;
 option go_package = "./";
 
 service Portfolios{
+  rpc PortfoliosServer(PortfoliosRequest) returns(PortfoliosReply){}//记录请求
   rpc GetImgCategory(ImgCategoryRequest) returns(ImgCategoryReply){}//获取照片类别
   rpc GetImgByCategory(ImgRequest) returns(ImgReply){}//根据类别Id获取图片
 };
+
+//-----------------------记录请求 start------------------
+message PortfoliosRequest{
+  string server_name = 1;
+  string ip = 2;
+  string ip_addr = 3;
+  string result = 4;
+}
+message PortfoliosReply{
+  string name = 1;
+  string message = 2;
+}
+//-----------------------记录请求 end------------------
 
 //-------------------------------获取照片类别 start----------------
 message ImgCategoryRequest{

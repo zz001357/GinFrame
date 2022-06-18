@@ -25,6 +25,13 @@ func main() {
 	 * @Date 2022/4/9 23:57
 	 * @Author ZhangZe
 	 **/
+	nInfo, _ := host.Info()
+	gin.SetMode(gin.ReleaseMode)
+
+	if nInfo.OS != "windows" {
+		gin.SetMode(gin.ReleaseMode)
+
+	}
 	r := gin.Default()
 	r.Use(common.Cors())       //开启中间件 允许使用跨域请求
 	r.Use(common.TlsHandler()) //开启中间件 使用https
@@ -40,14 +47,11 @@ func main() {
 	gin.DefaultWriter = io.MultiWriter(f, os.Stdout)
 
 	conn1, conn2, conn3, conn4 := Server(r)
-	nInfo, _ := host.Info()
 	if nInfo.OS == "windows" {
-		gin.SetMode(gin.DebugMode)
 		if err := r.Run(clientAddr); err != nil {
 			log.Fatal("程序启动失败:", err)
 		}
 	} else {
-		gin.SetMode(gin.ReleaseMode)
 		if err := r.RunTLS(clientAddr, "ggva.ren_bundle.pem", "ggva.ren.key"); err != nil {
 			log.Fatal("程序启动失败:", err)
 		}

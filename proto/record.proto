@@ -3,9 +3,23 @@ package record;
 option go_package = "./";
 
 service Record{
+  rpc RecordServer(RecordRequest) returns(RecordReply){}//记录请求
   rpc GetOtherRecord(OtherRecordRequest)returns(OtherRecordReply){}//获得其他记录信息
   rpc GetIterationRecord(IterationRecordRequest)returns(IterationRecordReply){}//获得其他记录信息
 }
+
+//-----------------------记录请求 start------------------
+message RecordRequest{
+  string server_name = 1;
+  string ip = 2;
+  string ip_addr = 3;
+  string result = 4;
+}
+message RecordReply{
+  string name = 1;
+  string message = 2;
+}
+//-----------------------记录请求 end------------------
 
 //-----------------------获得其他记录信息 start------------------
 message OtherRecordRequest{

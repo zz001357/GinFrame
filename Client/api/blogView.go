@@ -18,6 +18,25 @@ import (
 func BlogView(r *gin.Engine, conn *grpc.ClientConn) {
 	//创建RPC客户端
 	client := pb.NewBlogClient(conn)
+
+	r.POST("/handle/blog/server", func(c *gin.Context) {
+		/**
+		 * @Name 记录服务请求
+		 * @Param
+		 * @Return
+		 * @Date 2022/6/18 15:05
+		 * @Author ZhangZe
+		 **/
+		ip, addr := common.IpUntil()                                                                                     //记录ip 和 地址
+		reply, err := client.BlogServer(context.Background(), &pb.BlogRequest{ServerName: "blog", Ip: ip, IpAddr: addr}) //记录请求
+		if err != nil {
+			log.Println("Client端出错:", err)
+			c.JSON(http.StatusOK, reply)
+		} else {
+			c.JSON(http.StatusOK, reply)
+		}
+	})
+
 	//获取博文类别
 	r.POST("/handle/blog/getBlogsCategory", func(c *gin.Context) {
 		/**

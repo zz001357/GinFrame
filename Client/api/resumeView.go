@@ -27,8 +27,8 @@ func ResumeView(r *gin.Engine, conn *grpc.ClientConn) {
 		 * @Date 2022/6/18 15:05
 		 * @Author ZhangZe
 		 **/
-		ip, addr := common.IpUntil()                                                                                            //记录ip 和 地址
-		reply, err := client.RequestLogging(context.Background(), &pb.RequestParam{ServerName: "resume", Ip: ip, IpAddr: addr}) //记录请求
+		ip, addr := common.IpUntil()                                                                                           //记录ip 和 地址
+		reply, err := client.ResumeServer(context.Background(), &pb.ResumeRequest{ServerName: "resume", Ip: ip, IpAddr: addr}) //记录请求
 		if err != nil {
 			log.Println("Client端出错:", err)
 			c.JSON(http.StatusOK, reply)

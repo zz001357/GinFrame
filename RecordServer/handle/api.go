@@ -9,11 +9,26 @@ import (
 	pb "GinFrame/proto"
 	"context"
 	"fmt"
+	"time"
 )
 
 type Server struct {
 }
 
+func (s *Server) RecordServer(ctx context.Context, in *pb.RecordRequest) (*pb.RecordReply, error) {
+	ip := in.Ip
+	apiName := in.ServerName
+	addr := in.IpAddr
+	t := time.Now().Format("20060102 15:04:05") //请求时间
+	//记录sql
+	sql := fmt.Sprintf(`insert into t_server_logging (v_server_name,v_request_ip,v_request_addr,v_request_time)
+								values('%s','%s','%s','%s')`, apiName, ip, addr, t)
+	err := InsertSql(sql, Connection())
+	if err != nil {
+		return &pb.RecordReply{Name: "服务请求失败", Message: err.Error()}, nil
+	}
+	return &pb.RecordReply{Name: "服务请求成功", Message: "ok"}, nil
+}
 func (s *Server) GetOtherRecord(ctx context.Context, in *pb.OtherRecordRequest) (*pb.OtherRecordReply, error) {
 	/**
 	 * @Name 获取其他记录信息（如：网站说明）

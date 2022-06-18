@@ -16,7 +16,7 @@ import (
 type Server struct {
 }
 
-func (s *Server) RequestLogging(ctx context.Context, in *pb.RequestParam) (*pb.RequestReply, error) {
+func (s *Server) ResumeServer(ctx context.Context, in *pb.ResumeRequest) (*pb.ResumeReply, error) {
 	ip := in.Ip
 	apiName := in.ServerName
 	addr := in.IpAddr
@@ -26,9 +26,9 @@ func (s *Server) RequestLogging(ctx context.Context, in *pb.RequestParam) (*pb.R
 								values('%s','%s','%s','%s')`, apiName, ip, addr, t)
 	err := InsertSql(sql, Connection())
 	if err != nil {
-		return &pb.RequestReply{Name: "服务请求失败", Message: err.Error()}, nil
+		return &pb.ResumeReply{Name: "服务请求失败", Message: err.Error()}, nil
 	}
-	return &pb.RequestReply{Name: "服务请求成功", Message: "ok"}, nil
+	return &pb.ResumeReply{Name: "服务请求成功", Message: "ok"}, nil
 }
 
 func (s *Server) GetBaseInfo(ctx context.Context, in *pb.BaseInfoRequest) (*pb.BaseInfoReply, error) {
