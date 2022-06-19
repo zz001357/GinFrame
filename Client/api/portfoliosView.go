@@ -27,7 +27,7 @@ func PortfoliosView(r *gin.Engine, conn *grpc.ClientConn) {
 		 * @Date 2022/6/18 15:05
 		 * @Author ZhangZe
 		 **/
-		ip, addr := common.IpUntil()
+		ip, addr := common.IpUntil(c)
 		reply, err := client.PortfoliosServer(context.Background(), &pb.PortfoliosRequest{ServerName: "portfolios", Ip: ip, IpAddr: addr}) //记录请求
 		//记录ip 和 地址
 		if err != nil {

@@ -11,6 +11,7 @@ require (
 	github.com/rogpeppe/go-internal v1.8.0 // indirect
 	github.com/shirou/gopsutil v3.21.11+incompatible // indirect
 	github.com/spf13/viper v1.11.0
+	github.com/thinkeridea/go-extend v1.3.2 // indirect
 	github.com/tklauser/go-sysconf v0.3.10 // indirect
 	github.com/unrolled/secure v1.10.0 // indirect
 	github.com/yusufpapurcu/wmi v1.2.2 // indirect
