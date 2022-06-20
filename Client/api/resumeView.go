@@ -18,6 +18,24 @@ import (
 func ResumeView(r *gin.Engine, conn *grpc.ClientConn) {
 	//创建gRPC客户端
 	client := pb.NewResumeClient(conn)
+
+	r.POST("/handle/resume/server", func(c *gin.Context) {
+		/**
+		 * @Name 记录服务请求
+		 * @Param
+		 * @Return
+		 * @Date 2022/6/18 15:05
+		 * @Author ZhangZe
+		 **/
+		ip, addr := common.IpUntil(c)                                                                                          //记录ip 和 地址
+		reply, err := client.ResumeServer(context.Background(), &pb.ResumeRequest{ServerName: "resume", Ip: ip, IpAddr: addr}) //记录请求
+		if err != nil {
+			log.Println("Client端出错:", err)
+			c.JSON(http.StatusOK, reply)
+		} else {
+			c.JSON(http.StatusOK, reply)
+		}
+	})
 	//获取基本信息
 	r.POST("/handle/resume/getBaseInfo", func(c *gin.Context) {
 		/**
@@ -27,8 +45,7 @@ func ResumeView(r *gin.Engine, conn *grpc.ClientConn) {
 		 * @Date 2022/4/11 15:00
 		 * @Author ZhangZe
 		 **/
-		// 调用方法
-		reply, err := client.GetBaseInfo(context.Background(), &pb.BaseInfoRequest{Name: "获取基本信息", Message: "ok"})
+		reply, err := client.GetBaseInfo(context.Background(), &pb.BaseInfoRequest{Name: "获取基本信息", Message: "ok"}) // 调用方法
 		if err != nil {
 			log.Println("Client端出错:", err)
 			c.JSON(http.StatusOK, reply)

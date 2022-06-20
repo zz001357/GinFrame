@@ -3,9 +3,23 @@ package resume;
 option go_package = "./";
 
 service Resume{
+  rpc ResumeServer(ResumeRequest) returns(ResumeReply){}//记录请求
   rpc GetBaseInfo(BaseInfoRequest) returns(BaseInfoReply){}//获取基本信息
   rpc GetResumeInfo(ResumeInfoRequest) returns(ResumeInfoReply){}//获取简历信息
 };
+//-----------------------记录请求 start------------------
+message ResumeRequest{
+  string server_name = 1;
+  string ip = 2;
+  string ip_addr = 3;
+  string result = 4;
+}
+message ResumeReply{
+  string name = 1;
+  string message = 2;
+}
+//-----------------------记录请求 end------------------
+
 //-----------------------获取基本信息 start------------------
 message BaseInfoRequest{
   string name = 1;

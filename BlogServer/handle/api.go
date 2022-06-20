@@ -8,11 +8,27 @@ package handle
 import (
 	pb "GinFrame/proto"
 	"context"
+	"fmt"
+	"time"
 )
 
 type Server struct {
 }
 
+func (s *Server) BlogServer(ctx context.Context, in *pb.BlogRequest) (*pb.BlogReply, error) {
+	ip := in.Ip
+	apiName := in.ServerName
+	addr := in.IpAddr
+	t := time.Now().Format("20060102 15:04:05") //请求时间
+	//记录sql
+	sql := fmt.Sprintf(`insert into t_server_logging (v_server_name,v_request_ip,v_request_addr,v_request_time)
+								values('%s','%s','%s','%s')`, apiName, ip, addr, t)
+	err := InsertSql(sql, Connection())
+	if err != nil {
+		return &pb.BlogReply{Name: "服务请求失败", Message: err.Error()}, nil
+	}
+	return &pb.BlogReply{Name: "服务请求成功", Message: "ok"}, nil
+}
 func (s *Server) GetBlogsCategory(ctx context.Context, in *pb.BlogsCategoryRequest) (*pb.BlogsCategoryReply, error) {
 	/**
 	 * @Name 获取博文类别
